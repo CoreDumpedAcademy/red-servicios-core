@@ -1,0 +1,23 @@
+{
+  "name": "h-2",
+  "version": "1.0.0",
+  "description": "Basic API, to be used as a base for larger projects",
+  "main": "index.js",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "colors": "^1.3.3",
+    "express": "^4.16.4",
+    "mongoose": "^5.4.19",
+    "request": "^2.88.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.10"
+  },
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Carlos Pozuelo Rivas",
+  "license": "ISC"
+}
