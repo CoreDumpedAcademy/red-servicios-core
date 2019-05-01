@@ -21,6 +21,10 @@ export class LoginPage implements OnInit {
     })
   }
 
+  goBack(){
+    this.router.navigateByUrl('');
+  }
+
   ngOnInit() {
   }
 

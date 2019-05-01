@@ -4,7 +4,8 @@
       <ion-row color="" justify-content-center>
         <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
           <div text-center>
-            <h3>Login</h3>
+            <h3>Acabas de descubrir una funcionalidad solo apta para miembros</h3>
+            ¡No pasa nada! Introduce tu cuenta para continuar
           </div>
           <div padding>
             <ion-item>
@@ -20,10 +21,16 @@
         </ion-col>
       </ion-row>
       <ion-row>
-        <div text-center>
-      If you don't have an account, please <a routerLink='/register'>
-        register</a> first!
-        </div>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              ¿No tienes cuenta? ¡<a routerLink='/register'>Registrate</a> gratis!
+            </div>
+          </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="goBack()" shape="round" expand="full"> Volver atrás </ion-button>
+      </ion-col>
     </ion-row>
     </ion-grid>
   </form>
