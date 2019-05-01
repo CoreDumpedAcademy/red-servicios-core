@@ -1,0 +1,39 @@
+const UserSchema = require('../models/user');
+
+function addUser(req, res) {
+  console.log('Adding user'.blue);
+  const user = new UserSchema(req.body);
+  user.save((err) => {
+    if (err) return res.status(500).send(err);
+    return res.status(200).send('Datos guardados correctamente');
+  });
+}
+
+// REQUIERE PERMISOS DE ADMINISTRADOR
+
+function getUsers(req, res) {
+  console.log('GET de todos los usuarios'.blue);
+  UserSchema.find({}, (err, users) => {
+    if (err) return res.status(500).send(err);
+    if (!users) return res.status(404).send('No hay usuarios registrados');
+
+    return res.status(200).send({ users });
+  });
+}
+
+function editUser(req, res) {
+  const { username } = req.params;
+  const updated = req.body;
+  console.log(`EDITANDO al usuario ${username}`);
+
+  UserSchema.findOneAndUpdate({ username }, updated, (err) => {
+    if (err) return res.status(500).send(err);
+    return res.status(200).send('Usuario actualizado correctamente');
+  });
+}
+
+module.exports = {
+  addUser,
+  getUsers,
+  editUser,
+};

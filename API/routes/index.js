@@ -1,8 +1,10 @@
-const express = require('express')
+const express = require('express');
+const user = require('./user');
+const ins = require('./ins');
+
 const api = express.Router();
 
-const example = require('./example')
-
-api.use('/example', example) // EXAMPLE ROUTES
+api.use('/user', user); // USER ROUTES
+api.use('/ins', ins); // INSIGNIAS
 
 module.exports = api;
