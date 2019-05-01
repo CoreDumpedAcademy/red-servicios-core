@@ -23,7 +23,7 @@ export class Tab2Page {
                 msg : '¡Escúchalo en iVoox y suscríbete!'
             },
             {
-                img : '',
+                img : '/assets/photo65972961570564334.jpg',
                 title : 'Carta del presidente',
                 msg : 'Sobre la filosofía de la asociación “Core Dumped es un espacio joven, ' +
                     'abierto y gratuito que incentiva el aprendizaje y el desarrollo de proyectos más allá de lo…'
