@@ -1,0 +1,32 @@
+<ion-content color="" padding>
+  <form #form="ngForm" (ngSubmit)="createAcc(form)">
+    <ion-grid>
+      <ion-row color="" justify-content-center>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div text-center>
+            <h3>¡Vamos a vincular tus cuentas!</h3>
+            Por lo que veo, eres usuario de la nevera. Necesitamos un nombre de usuario para crear tu cuenta
+          </div>
+          <div padding>
+            <ion-item>
+              @<ion-input name="username" type="username" placeholder="Nombredeusuario" ngModel required></ion-input>
+            </ion-item>
+          </div>
+          <div padding>
+            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Crear cuenta</ion-button>
+          </div>
+          <div text-center>
+            {{error}}
+          </div>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="goBack()" shape="round" expand="full"> Volver atrás </ion-button>
+      </ion-col>
+    </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
