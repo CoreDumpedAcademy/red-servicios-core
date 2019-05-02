@@ -29,9 +29,15 @@ export class AuthserviceService {
   }
   async isLoggedIn(){
     var resul:Boolean
-    await this.storage.get("USER_EMAIL").then((data) => {
+    await this.storage.get("EMAIL").then((data) => {
       resul = data == null
     })
     return !resul
+  }
+
+  // NO SÉ SI FUNCIONA
+  async logOut(){
+    await this.storage.remove("TOKEN");
+    await this.storage.remove("EMAIL");
   }
 }

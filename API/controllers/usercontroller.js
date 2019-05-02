@@ -21,6 +21,17 @@ function getUsers(req, res) {
   });
 }
 
+function getUser (req, res) {
+  const { email } = req.params;
+  console.log(`GET de ${email}`.blue);
+  UserSchema.findOne({ email }, (err, user) => {
+    if (err) return res.status(500).send(err);
+    if (!user) return res.status(404).send('No existe el usuario');
+
+    return res.status(200).send({ user });
+  });
+}
+
 function editUser(req, res) {
   const { username } = req.params;
   const updated = req.body;
@@ -36,4 +47,5 @@ module.exports = {
   addUser,
   getUsers,
   editUser,
+  getUser,
 };
