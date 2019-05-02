@@ -24,7 +24,7 @@ function getUsers(req, res) {
 function getUser (req, res) {
   const { email } = req.params;
   console.log(`GET de ${email}`.blue);
-  UserSchema.findOne({ email }, (err, user) => {
+  UserSchema.findOne({ $or: [{ email }, { username: email }] }, (err, user) => {
     if (err) return res.status(500).send(err);
     if (!user) return res.status(404).send('No existe el usuario');
 

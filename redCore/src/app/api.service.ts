@@ -11,7 +11,11 @@ export class APIService {
   constructor(private http: HttpClient) { }
 
   tieneCuenta(email:String) {
-    return this.http.get(`${this.API}/user/${email}`)
+    return this.http.get(`${this.API}user/${email}`)
+  }
+
+  registrarUsuario(body) {
+    return this.http.post(`${this.API}user/`, body)
   }
 
 }
