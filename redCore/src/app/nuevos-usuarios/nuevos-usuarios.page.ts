@@ -31,11 +31,9 @@ export class NuevosUsuariosPage implements OnInit {
           username: form.value.username
         }
         await this.api.registrarUsuario(body).subscribe((data) => {
-          this.router.navigateByUrl('');
         },
         (error) => {
-          console.log(error)
-          this.error = "Oops! Algo ha ido mal"
+          this.router.navigateByUrl('');
         }
         )
     })

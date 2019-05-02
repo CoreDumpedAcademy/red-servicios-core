@@ -10,6 +10,8 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
+  err:String = ""
+
   constructor(private auth: AuthserviceService, private router: Router, private api: APIService) { }
 
   async login(form) {
@@ -23,6 +25,8 @@ export class LoginPage implements OnInit {
       } else {
         alert("jo")
       }
+    }, (err) => {
+      this.err = "Usuario o contraseña incorrectos"
     })
   }
 

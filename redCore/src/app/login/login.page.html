@@ -15,6 +15,11 @@
               <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
             </ion-item>
           </div>
+          <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+            <div text-center>
+              {{err}}
+            </div>
+          </ion-col>
           <div padding>
             <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Login</ion-button>
           </div>
