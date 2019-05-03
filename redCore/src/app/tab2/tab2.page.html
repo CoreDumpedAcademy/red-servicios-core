@@ -1,10 +1,17 @@
 <ion-content padding>
-  <ion-card-header class="welcome-card" style="top: 0px">
-      <ion-img src="/assets/logo_cd_white.png"></ion-img>
-  </ion-card-header>
+    <ion-card-header class="welcome-card" style="top: 0px">
+        <ion-img src="/assets/logo_cd_white.png"></ion-img>
+    </ion-card-header>
     <ion-card *ngFor="let content of contents">
-      <ion-img *ngIf="content.img != undefined" src="{{ content.img }}"></ion-img>
-      <h2 text-center> {{ content.title }} </h2>
-      <p padding> {{ content.msg }} </p>
+        <ion-img *ngIf="content.img != undefined" src="{{ content.img }}"></ion-img>
+        <h2 text-center> {{ content.title }} </h2>
+        <p padding> {{ content.msg }} </p>
     </ion-card>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button>
+            <ion-tab-button tab="About">
+                <ion-icon name="information-circle"></ion-icon>
+            </ion-tab-button>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>
