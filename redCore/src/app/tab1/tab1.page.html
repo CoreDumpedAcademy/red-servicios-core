@@ -8,9 +8,33 @@
 
 <ion-content>
   <div class="banner">
-    <br><br><br><br><br>
-    a
-    <br><br><br><br><br>
+    <br><br><br>
+    <img src="{{picture}}">
+    <br>
+    <ion-card>
+      <ion-card-content>
+      <h2>Saldo de la nevera: {{balance}}€</h2>
+    </ion-card-content>
+    </ion-card>
+    <br>
   </div>
+  <ion-item>
+    <ion-label text-center>Insignias</ion-label>
+  </ion-item>
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let ins of insignias">
+        <ion-card>
+          <ion-card-content>
+          <img src="../../assets/insignias/placeholder.png" (click)="verInsignia(ins)">
+          </ion-card-content>
+        </ion-card>
+      </ion-slide>
+    </ion-slides>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 </ion-content>
 

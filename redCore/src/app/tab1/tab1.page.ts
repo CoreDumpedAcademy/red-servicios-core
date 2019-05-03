@@ -17,6 +17,16 @@ export class Tab1Page {
   insignias:[{}]
   rol:Number
   picture:String
+  balance:Number
+  status:String
+
+  sliderConfig = {
+    loop: false,
+    initialSlide: 1,
+    spaceBetween: 5,
+    centeredSlides: true,
+    slidesPerView: 2.3
+  }
 
   constructor(private router: Router, private auth: AuthserviceService, private API: APIService) { }
 
@@ -41,13 +51,27 @@ export class Tab1Page {
         this.rol = data.user.rol
       }
     )
-    this.auth.getUser(this.email).then((data)=>{
-      data.subscribe((owo) => console.log(owo))
-    })
+    this.auth.getUser().then(promise => promise.subscribe(
+      (data:{
+        avatarImage:String,
+        balance:Number,
+        status:String
+      })=> {
+        this.picture = this.auth.AUTH_SERVER_ADRESS+data.avatarImage
+        this.balance = data.balance
+        this.status = data.status
+      }))
+  }
+
+  verInsignia(ins:{
+    descripcion:String,
+    nombre:String
+  }){
+    console.log(ins)
   }
 
   async ngOnInit() {
-    this.loadData();
+    await this.loadData();
   }
 
 

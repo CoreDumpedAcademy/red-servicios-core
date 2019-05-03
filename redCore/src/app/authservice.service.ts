@@ -1,4 +1,3 @@
-import { CookieService } from 'ngx-cookie-service';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
@@ -9,21 +8,20 @@ import { Storage } from '@ionic/storage'
   providedIn: 'root'
 })
 export class AuthserviceService {
-
-  cookieValue = ''
-
   AUTH_SERVER_ADRESS: string = 'https://fridge.coredumped.es';
   authSubject = new BehaviorSubject(false);
 
-  constructor(private http: HttpClient, private storage: Storage, private cookie: CookieService ) { }
+  constructor(private http: HttpClient, private storage: Storage ) { }
 
-  async getUser(email){
-    let header = new HttpHeaders();
-    let token
-    await this.getToken().then(data => token = data)
-    header.append('token', token)
-    console.log(header)
-    return this.http.get(`${this.AUTH_SERVER_ADRESS}/user/`)
+  async getUser(){
+    const token = await this.storage.get("TOKEN")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization' : 'Bearer '+token
+      })
+    }
+    return this.http.get(`${this.AUTH_SERVER_ADRESS}/user/`, httpOptions)
   }
 
   async getEmail() {
@@ -43,8 +41,7 @@ export class AuthserviceService {
         isAdmin: Boolean
       }) => {
         if(res.token) {
-          this.cookie.set('token', res.token.toString());
-          this.cookieValue = await this.cookie.get('test');
+          await this.storage.set("TOKEN", res.token);
           await this.storage.set("EMAIL", user.email);
           this.authSubject.next(true);
         }

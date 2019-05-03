@@ -4,8 +4,8 @@
       display: block;
       margin-left: auto;
       margin-right: auto;
-      width: 40%;
-      border-radius: 50%;
+      width: 50%;
+      //border-radius: 50%;
   }
   text-align: center;
   ion-button{
@@ -13,5 +13,8 @@
       --background: #FCBA04;
       color: #54494B;
       font-weight :bold;
+  }
+  ion-card{
+    --background: white;
   }
 }
