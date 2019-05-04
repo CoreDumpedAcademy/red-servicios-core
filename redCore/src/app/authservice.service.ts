@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from  'rxjs';
 import { Storage } from '@ionic/storage'
@@ -12,6 +12,27 @@ export class AuthserviceService {
   authSubject = new BehaviorSubject(false);
 
   constructor(private http: HttpClient, private storage: Storage ) { }
+
+  async getUser(){
+    const token = await this.storage.get("TOKEN")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization' : 'Bearer '+token
+      })
+    }
+    return this.http.get(`${this.AUTH_SERVER_ADRESS}/user/`, httpOptions)
+  }
+
+  async getEmail() {
+    let mail = this.storage.get("EMAIL")
+    return mail
+  }
+
+  async getToken(){
+    let token = this.storage.get("TOKEN")
+    return token
+  }
 
   login(user){
     return this.http.post(`${this.AUTH_SERVER_ADRESS}/login`, user).pipe(

@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
@@ -8,7 +9,7 @@ export class APIService {
 
   API:String = "http://localhost:3000/api/"
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private storage: Storage) { }
 
   tieneCuenta(email:String) {
     return this.http.get(`${this.API}user/${email}`)

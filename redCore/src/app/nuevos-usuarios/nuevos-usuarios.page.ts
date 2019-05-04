@@ -1,3 +1,4 @@
+import { AuthserviceService } from './../authservice.service';
 import { Storage } from '@ionic/storage';
 import { APIService } from './../api.service';
 import { Component, OnInit } from '@angular/core';
@@ -13,7 +14,8 @@ export class NuevosUsuariosPage implements OnInit {
   error:String = ""
   email:String
 
-  constructor(private api: APIService, private router: Router, private storage: Storage) {
+  constructor(private api: APIService, private router: Router, private storage: Storage,
+    private auth: AuthserviceService) {
     storage.get('EMAIL').then(data => this.email = data)
    }
 
@@ -28,7 +30,7 @@ export class NuevosUsuariosPage implements OnInit {
       async err => {
         let body = {
           email: this.email,
-          username: form.value.username
+          username: form.value.username,
         }
         await this.api.registrarUsuario(body).subscribe((data) => {
         },
