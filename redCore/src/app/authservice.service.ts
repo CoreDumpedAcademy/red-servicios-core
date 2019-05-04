@@ -30,14 +30,20 @@ export class AuthserviceService {
   async isLoggedIn(){
     var resul:Boolean
     await this.storage.get("EMAIL").then((data) => {
+      console.log(data.email);
       resul = data == null
     })
     return !resul
   }
 
   // NO SÉ SI FUNCIONA
-  async logOut(){
-    await this.storage.remove("TOKEN");
-    await this.storage.remove("EMAIL");
+ async logOut(){
+    try {await this.storage.remove("TOKEN");
+         await this.storage.remove("EMAIL");
+    } 
+    catch (error) {
+      console.log("error" + error);
+    }
+    finally {this.isLoggedIn;}
   }
 }

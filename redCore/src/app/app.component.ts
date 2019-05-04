@@ -46,6 +46,10 @@ export class AppComponent {
         return this.auth.isLoggedIn;
     }
 
+    logOut(){
+        this.auth.logOut;
+    }
+
     initializeApp() {
         this.platform.ready().then(() => {
             this.statusBar.styleDefault();
