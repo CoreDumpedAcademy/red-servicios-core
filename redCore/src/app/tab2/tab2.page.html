@@ -8,10 +8,8 @@
         <p padding> {{ content.msg }} </p>
     </ion-card>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button>
-            <ion-tab-button tab="About">
-                <ion-icon name="information-circle"></ion-icon>
-            </ion-tab-button>
-        </ion-fab-button>
+      <ion-fab-button (click)="toAbout()">
+        <ion-icon name="information-circle"></ion-icon>
+      </ion-fab-button>
     </ion-fab>
 </ion-content>

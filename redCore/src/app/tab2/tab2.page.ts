@@ -1,4 +1,5 @@
 import {Component} from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-tab2',
@@ -9,7 +10,7 @@ export class Tab2Page {
 
     public contents: Array<object> = [];
 
-    constructor() {
+    constructor(private router: Router) {
         this.contents = [
             {
                 img : '/assets/MicrosoftF82.jpg',
@@ -29,5 +30,9 @@ export class Tab2Page {
                     'abierto y gratuito que incentiva el aprendizaje y el desarrollo de proyectos más allá de lo…'
             },
         ];
+    }
+
+    toAbout() {
+        this.router.navigateByUrl('about')
     }
 }
