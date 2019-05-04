@@ -21,7 +21,7 @@ function getUsers(req, res) {
   });
 }
 
-function getUser (req, res) {
+function getUser(req, res) {
   const { email } = req.params;
   console.log(`GET de ${email}`.blue);
   UserSchema.findOne({ $or: [{ email }, { username: email }] }, (err, user) => {
