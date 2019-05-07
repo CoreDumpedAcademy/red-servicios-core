@@ -10,17 +10,33 @@
 </ion-header>
 
 <ion-content padding>
-    <ion-card-header class="welcome-card" style="top: 0px">
+    <ion-card-header  (click)="toAbout()" class="welcome-card" style="top: 0px">
         <ion-img src="/assets/logo_cd_white.png"></ion-img>
     </ion-card-header>
-    <ion-card *ngFor="let content of contents">
-        <ion-img *ngIf="content.img != undefined" src="{{ content.img }}"></ion-img>
-        <h2 text-center> {{ content.title }} </h2>
-        <p padding> {{ content.msg }} </p>
-    </ion-card>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="toAbout()">
-        <ion-icon name="information-circle"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+        <ion-button (click)="gotoServices()" shape="round" expand="full"> Servicios </ion-button>
+      <ion-item>
+        <ion-grid>
+          <h2 text-center>Calendario</h2>
+        </ion-grid>
+      </ion-item>
+    <ion-img src="../../assets/calendario-mayo-2019.png"></ion-img>
+    <ion-item>
+      <ion-grid>
+        <h2 text-center>Noticias</h2>
+      </ion-grid>
+    </ion-item>
+    <ion-item>
+      <ion-slides [options]="sliderConfig">
+        <ion-slide *ngFor="let article of contents">
+          <ion-card>
+            <ion-img src="{{article.img}}"></ion-img>
+            <ion-card-header> <h2>{{article.title}}</h2> </ion-card-header>
+            <ion-card-content> {{article.msg}} </ion-card-content>
+            <ion-chip color="primary">
+                <ion-label>Leer más</ion-label>
+              </ion-chip>              
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+  </ion-item>
 </ion-content>
