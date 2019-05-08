@@ -97,6 +97,7 @@ function editQuestion(req, res) {
     if (err) return res.status(500).send(err);
     if (!foro) return res.status(404).send('No existe el foro');
     if (pos === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos expected to be a number');
     if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
     if (!question) return res.status(400).send('Expected question argument');
 
@@ -112,16 +113,17 @@ function editQuestion(req, res) {
 function solveQuestion(req, res) {
   const { title } = req.params;
   const { pos } = req.body;
-  const { status } = req.body;
+  const { solved } = req.body;
 
   Foro.findOne({ title }, (err, foro) => {
     if (err) return res.status(500).send(err);
     if (!foro) return res.status(404).send('No existe el foro');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos argument must be a number');
     if (pos === undefined) return res.status(400).send('Expected pos argument');
     if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
-    if (status === undefined) return res.status(400).send('Expected status argument');
+    if (solved === undefined) return res.status(400).send('Expected status argument');
 
-    foro.preguntas[pos].solved = status;
+    foro.preguntas[pos].solved = solved;
 
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);

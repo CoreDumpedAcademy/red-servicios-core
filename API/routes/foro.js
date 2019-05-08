@@ -16,7 +16,7 @@ router.get('/pregunta/:title', Foro.getQuestion); // PASAR 'pos' EN BODY. POS ES
 router.post('/pregunta/:title', Foro.addQuestion); // PASAR LA PREGUNTA EN EL BODY
 router.put('/pregunta/:title', Foro.editQuestion); // PASAR 'question' EN EL BODY CON LA ACTUALIZACIÓN, Y 'pos' CON LA POSICIÓN DE LA PREGUNTA
 router.put('/status/:title', Foro.solveQuestion); // SIRVE PARA ACTIVAR O DESACTIVAR LA PREGUNTA.
-// PASAR 'pos' Y 'status', que es true si queremos activarla o false si queremos desactivarla.
+// PASAR 'pos' Y 'solved', que es true si la pregunta está resuelta o false si sigue sin resolver
 
 // RESPUESTAS
 
