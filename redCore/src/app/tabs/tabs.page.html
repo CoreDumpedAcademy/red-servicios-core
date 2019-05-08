@@ -2,11 +2,11 @@
 
     <ion-tab-bar slot="bottom">
       
-      <ion-tab-button *ngIf="!isLoggedIn()" (click)="redirectToLogin()"> 
+      <ion-tab-button *ngIf="isLoggedIn()" (click)="redirectToLogin()"> 
           <ion-icon name="md-contact"></ion-icon>
           <ion-label>Profile</ion-label>
       </ion-tab-button>
-      <ion-tab-button tab="profile" *ngIf="isLoggedIn()"> 
+      <ion-tab-button tab="profile" *ngIf="!isLoggedIn()"> 
         <ion-icon name="md-contact"></ion-icon>
         <ion-label>Profile</ion-label>
       </ion-tab-button>
@@ -17,11 +17,11 @@
         <ion-label>Home</ion-label>
       </ion-tab-button>
   
-      <ion-tab-button *ngIf="!isLoggedIn()" (click)="redirectToLogin()">
+      <ion-tab-button *ngIf="isLoggedIn()" (click)="redirectToLogin()">
         <ion-icon name="md-chatboxes"></ion-icon>
         <ion-label>Messages</ion-label>
       </ion-tab-button>
-      <ion-tab-button tab="messages" *ngIf="isLoggedIn()">
+      <ion-tab-button tab="messages" *ngIf="!isLoggedIn()">
         <ion-icon name="md-chatboxes"></ion-icon>
         <ion-label>Messages</ion-label>
       </ion-tab-button>

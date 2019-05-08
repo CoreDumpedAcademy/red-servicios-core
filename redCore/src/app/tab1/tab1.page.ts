@@ -80,6 +80,7 @@ export class Tab1Page {
 
   async ngOnInit() {
     await this.loadData();
+
   }
 
 

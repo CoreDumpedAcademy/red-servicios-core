@@ -18,10 +18,10 @@ export class TabsPage {
         private navCntrl: NavController
         ){}
 
-    isLoggedIn(){
-        return this.auth.isLoggedIn;
-    }
-
+    async isLoggedIn() {
+        await this.auth.isLoggedIn();
+    } 
+        
     redirectToLogin(){
         this.navCntrl.navigateRoot('/login');
     }

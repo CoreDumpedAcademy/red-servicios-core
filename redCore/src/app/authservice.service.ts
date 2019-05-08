@@ -48,11 +48,12 @@ export class AuthserviceService {
       })
     )
   }
+
   async isLoggedIn(){
-    var resul:Boolean
+    var resul:boolean
     await this.storage.get("EMAIL").then((data) => {
       console.log(data.email);
-      resul = data == null
+      resul = true
     })
     return !resul
   }
@@ -67,4 +68,6 @@ export class AuthserviceService {
     }
     finally {this.isLoggedIn;}
   }
+
+
 }
