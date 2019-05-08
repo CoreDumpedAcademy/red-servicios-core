@@ -20,14 +20,10 @@
   </div>
   <ion-item>
     <ion-label text-center>Insignias</ion-label>
-  </ion-item>
+  </ion-item><br>
     <ion-slides [options]="sliderConfig">
       <ion-slide *ngFor="let ins of insignias">
-        <ion-card>
-          <ion-card-content>
-          <img src="../../assets/insignias/placeholder.png" (click)="verInsignia(ins)">
-          </ion-card-content>
-        </ion-card>
+          <img src="../../assets/insignias/{{ins.nombre}}.png" (click)="verInsignia(ins)">
       </ion-slide>
     </ion-slides>
   <ion-grid>

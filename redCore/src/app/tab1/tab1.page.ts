@@ -14,7 +14,11 @@ export class Tab1Page {
 
   email:String
   user:String
-  insignias:[{}]
+  insignias:[{
+    nombre:String,
+    descripcion:String,
+    id:Number
+  }]
   rol:Number
   picture:String
   balance:Number
@@ -25,7 +29,7 @@ export class Tab1Page {
     initialSlide: 1,
     spaceBetween: 5,
     centeredSlides: true,
-    slidesPerView: 2.3
+    slidesPerView: 4
   }
 
   constructor(private router: Router, private auth: AuthserviceService, private API: APIService) { }
@@ -42,7 +46,11 @@ export class Tab1Page {
           },
           email:String,
           rol:Number
-          insignias:[{}],
+          insignias:[{
+            nombre:String,
+            descripcion:String,
+            id:Number
+          }],
           username:String
         }
       }) => {
