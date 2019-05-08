@@ -18,6 +18,8 @@ const UserSchema = Schema({
     slack: { type: String, default: '' },
   },
   rol: { type: Number, default: 0 },
+  picture: String,
+  bio: String,
 });
 
 module.exports = mongoose.model('UserSchema', UserSchema);
