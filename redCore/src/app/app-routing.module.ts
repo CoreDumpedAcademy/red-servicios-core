@@ -6,7 +6,11 @@ const routes: Routes = [
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
   { path: 'register', loadChildren: './register/register.module#RegisterPageModule' },
   { path: 'nuevos-usuarios', loadChildren: './nuevos-usuarios/nuevos-usuarios.module#NuevosUsuariosPageModule' },
-  { path: 'about', loadChildren: './about/about.module#AboutPageModule' }
+  { path: 'about', loadChildren: './about/about.module#AboutPageModule' },  { path: 'lista-foros', loadChildren: './foro/lista-foros/lista-foros.module#ListaForosPageModule' },
+  { path: 'lista-preguntas', loadChildren: './foro/lista-preguntas/lista-preguntas.module#ListaPreguntasPageModule' },
+  { path: 'lista-respuestas', loadChildren: './foro/lista-respuestas/lista-respuestas.module#ListaRespuestasPageModule' },
+  { path: 'respuesta', loadChildren: './foro/respuesta/respuesta.module#RespuestaPageModule' }
+
 
 ];
 
