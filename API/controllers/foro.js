@@ -11,9 +11,7 @@ function getForos(req, res) {
 }
 
 function getForo(req, res) {
-  const { pos } = req.params;
   const { title } = req.params;
-  console.log(`GET DEL FORO ${pos}`.blue);
   Foro.findOne({ title }, (err, foro) => {
     if (err) return res.status(500).send(err);
     if (!foro) return res.status(404).send('Foro no encontrado');
@@ -127,6 +125,7 @@ function solveQuestion(req, res) {
     if (solved === undefined) return res.status(400).send('Expected status argument');
 
     foro.preguntas[pos].solved = solved;
+    if (solved) foro.preguntas[pos].datewhenSolved = Date.now();
 
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
