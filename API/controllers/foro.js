@@ -68,6 +68,9 @@ function getQuestion(req, res) {
   Foro.findOne({ title }, (err, foro) => {
     if (err) return res.status(500).send(err);
     if (!foro) return res.status(404).send('No existe ese foro');
+    if (pos === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
     if (!foro.preguntas[pos]) return res.status(404).send('No existe la pregunta');
     return res.status(200).send(foro.preguntas[pos]);
   });
@@ -133,6 +136,88 @@ function solveQuestion(req, res) {
   });
 }
 
+function getAnswers(req, res) {
+  const { title } = req.params;
+  const { pos } = req.body;
+  Foro.findOne({ title }, (err, foro) => {
+    if (err) return res.status(500).send(err);
+    if (!foro) return res.status(404).send('No existe ese foro');
+    if (pos === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
+    if (!foro.preguntas[pos]) return res.status(404).send('No existe la pregunta');
+    return res.status(200).send(foro.preguntas[pos].respuestas);
+  });
+}
+
+function getAnswer(req, res) {
+  const { title } = req.params;
+  const { pos } = req.body;
+  const { ans } = req.body;
+  Foro.findOne({ title }, (err, foro) => {
+    if (err) return res.status(500).send(err);
+    if (!foro) return res.status(404).send('No existe ese foro');
+    if (pos === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
+    if (ans === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (ans) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (ans > foro.preguntas[pos].respuestas.length) return res.status(400).send('No existe respuesta en esa posicion');
+    if (!foro.preguntas[pos]) return res.status(404).send('No existe la pregunta');
+    if (!foro.preguntas[pos].respuestas[ans]) return res.status(500).send('No existe la respuesta');
+
+    return res.status(200).send(foro.preguntas[pos].respuestas[ans]);
+  });
+}
+
+function addAnswer(req, res) {
+  const { title } = req.params;
+  const { answer } = req.body;
+  const { pos } = req.body;
+  Foro.findOne({ title }, (err, foro) => {
+    if (err) return res.status(500).send(err);
+    if (!foro) return res.status(404).send('No existe el foro');
+    if (!answer) return res.status(403).send('Debes colocar una respuesta');
+    if (pos === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
+    if (!foro.preguntas[pos]) return res.status(404).send('No existe la pregunta');
+    foro.preguntas[pos].respuestas.push(answer);
+    Foro.update({ title }, foro, (error) => {
+      if (error) return res.status(500).send(error);
+      return res.status(200).send('Respuesta guardada correctamente');
+    });
+    return 'ok';
+  });
+}
+
+function editAnswer(req, res) {
+  const { title } = req.params;
+  const { pos } = req.body;
+  const { answer } = req.body;
+  const { ans } = req.body;
+  Foro.findOne({ title }, (err, foro) => {
+    if (err) return res.status(500).send(err);
+    if (!foro) return res.status(404).send('No existe el foro');
+    if (pos === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (pos) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
+    if (ans === undefined) return res.status(400).send('Expected pos argument');
+    if (typeof (ans) !== 'number') return res.status(400).send('pos expected to be a number');
+    if (ans > foro.preguntas[pos].respuestas.length) return res.status(400).send('No existe pregunta en esa posicion');
+    if (!foro.preguntas[pos]) return res.status(404).send('No existe la pregunta');
+    if (!foro.preguntas[pos].respuestas[ans]) return res.status(500).send('No existe la respuesta');
+    if (!answer) return res.status(400).send('Expected answer argument');
+
+    foro.preguntas[pos].respuestas[ans] = answer;
+    Foro.update({ title }, foro, (error) => {
+      if (error) return res.status(500).send(error);
+      return res.status(200).send('Respuesta editada correctamente');
+    });
+    return 'OK';
+  });
+}
+
 module.exports = {
   getForos,
   getForo,
@@ -144,4 +229,8 @@ module.exports = {
   addQuestion,
   editQuestion,
   solveQuestion,
+  getAnswers,
+  getAnswer,
+  addAnswer,
+  editAnswer,
 };

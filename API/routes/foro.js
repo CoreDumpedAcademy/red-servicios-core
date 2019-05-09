@@ -19,5 +19,8 @@ router.put('/status/:title', Foro.solveQuestion); // SIRVE PARA ACTIVAR O DESACT
 // PASAR 'pos' Y 'solved', que es true si la pregunta está resuelta o false si sigue sin resolver
 
 // RESPUESTAS
-
+router.get('/respuestas/:title', Foro.getAnswers); // PASAR 'pos' EN BODY, OBTIENE TODAS LAS RESPUESTAS DE UNA PREGUNTA EN ESA POSICION
+router.get('/respuesta/:title', Foro.getAnswer); // PASAR 'pos' Y 'ans'. DEVUELVE LA RESPUESTA EN POSICION ANS DE LA PREGUNTA DE LA POSICION POS
+router.post('/respuesta/:title', Foro.addAnswer); // PASAR 'answer' Y 'pos'. AÑADE LA RESPUESTA 'answer' A LA PREGUNTA DE LA POSICION POS
+router.put('/respuesta/:title', Foro.editAnswer); // PASAR 'pos', 'answer' Y 'ans'. EDITA LA RESPUESTA EN POSICION 'ans' Y LA SUSTITUYE POR 'answer'
 module.exports = router;
