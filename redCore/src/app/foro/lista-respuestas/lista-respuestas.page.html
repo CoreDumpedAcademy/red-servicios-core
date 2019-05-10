@@ -1,9 +1,14 @@
-<ion-header>
-  <ion-toolbar>
-    <ion-title>listaRespuestas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-header *ngIf="hasLoaded">
+    <ion-toolbar color="primary">
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>
+        {{foro.title}}
+      </ion-title>
+    </ion-toolbar>
+  </ion-header>
 
-<ion-content>
-
+<ion-content *ngIf="hasLoaded">
 </ion-content>
+    

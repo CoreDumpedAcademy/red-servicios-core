@@ -1,19 +1,34 @@
 <ion-header *ngIf="hasLoaded">
-    <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        {{foro.title}}
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      {{foro.title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
 
 <ion-content *ngIf="hasLoaded">
-  <ion-card *ngFor="let pregunta of foro.preguntas" padding>
+  <ion-grid>
+    <ion-col padding>
+      <ion-item>
+          <p style="font-size: 16px">{{foro.description}}</p>
+          <!--<ion-button *ngIf="isAMember" expand="full" shape="round">Desuscribirse</ion-button>
+          <ion-button *ngIf="!isAMember" expand="full" shape="round">Suscribirse</ion-button>
+          -->
+      </ion-item>
+      <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
+   </ion-col>
+  </ion-grid>
+  <ion-card *ngFor="let pregunta of foro.preguntas; index as i" padding  (click)="goToQuestion(i)">
     <h2>{{pregunta.title}}</h2>
-    {{pregunta.text}}
+    <ion-item>
+      {{pregunta.text}}
+    </ion-item>
+    <ion-item>
+      <p text-left>{{pregunta.user.username}} - {{pregunta.published}} </p>
+    </ion-item>
   </ion-card>
-
 </ion-content>

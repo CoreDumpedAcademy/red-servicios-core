@@ -24,7 +24,7 @@ const pregunta = Schema({
 });
 
 const foro = Schema({
-  title: { type: String, unique: true },
+  title: { type: String, unique: true, required: true },
   description: String,
   members: [user],
   preguntas: [pregunta],

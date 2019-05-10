@@ -14,14 +14,14 @@ export class ListaPreguntasPage implements OnInit {
   foro: {
     title:String,
     description:String,
-    members: {
+    members: [{
       username: String,
       picture: String
-    },
+    }],
     preguntas:[{
       title:String,
       text:String,
-      published:String,
+      published:Date,
       solved:Boolean,
       respuestas:[{}],
       datewhenSolved:Date,
@@ -30,18 +30,23 @@ export class ListaPreguntasPage implements OnInit {
     admins:[String]
   }
 
+  hasLoaded=false
+  currentUser
+  isAMember
+  isAnAdmin
+
   async getData() {
-    await this.service.getForo().subscribe((data:{
+    await this.service.getForo().subscribe(async (data:{
       title:String,
       description:String,
-      members: {
+      members: [{
         username: String,
         picture: String
-      },
+      }],
       preguntas:[{
         title:String,
         text:String,
-        published:String,
+        published:Date,
         solved:Boolean,
         respuestas:[{}],
         datewhenSolved:Date,
@@ -50,12 +55,42 @@ export class ListaPreguntasPage implements OnInit {
       admins:[String]
     }) => {
       this.foro = data
-      this.hasLoaded=true
-      console.log(this.foro)
+      await this.service.getCurrentUser().then(
+        async (promise) => {
+          await promise.subscribe(async (user:{
+            user:{
+              username
+            }
+          }) => {
+            this.currentUser = user.user.username
+            //this.isAMember = await this.isInTheArray(this.foro.members, user.user.username)
+            //this.isAnAdmin = await this.foro.admins.includes(user.user.username)
+            this.hasLoaded=true
+          })
+        }
+      )
     },
-    (err) => this.router.navigateByUrl(''))
+    (err) => this.router.navigateByUrl('lista-foros'))
   }
-  hasLoaded=false
+
+  /*
+  isInTheArray(array:[{username:String}], user:{username:String}) {
+    for(let i = 0; i<array.length;i++){
+      console.log('owo')
+      if(array[i].username === user.username) return true
+    }
+    return false
+  }
+  */
+
+  goToQuestion(index:Number){
+    this.service.preguntaAct = index;
+    this.router.navigateByUrl('lista-respuestas')
+  }
+
+  goBack() {
+    this.router.navigateByUrl('lista-foros')
+  }
   async ngOnInit() {
     await this.getData()
   }
