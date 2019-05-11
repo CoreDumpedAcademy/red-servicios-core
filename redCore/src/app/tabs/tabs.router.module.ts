@@ -44,10 +44,46 @@ const routes: Routes = [
         ]
       },
       {
+        path: 'nuevos-usuarios',
+        children:[
+        {
+          path: '',
+          loadChildren:  '../nuevos-usuarios/nuevos-usuarios.module#NuevosUsuariosPageModule'
+        }
+        ]
+      },
+      {
+        path: 'register',
+        children:[
+        {
+          path: '', 
+          loadChildren: '../register/register.module#RegisterPageModule' 
+        }
+        ]
+      },
+      {
+        path: 'servicios',
+        children:[
+        {
+          path: '', 
+          loadChildren: './servicios/servicios.module#ServiciosPageModule'
+        }
+        ]
+      },
+      {
+        path: 'login',
+        children:[
+        {
+          path: '', 
+          loadChildren: './login/login.module#LoginPageModule'
+        }
+        ]
+      },
+      {
         path: '',
         redirectTo: '/core/home',
         pathMatch: 'full'
-      },
+      }
      
     ]
   },
