@@ -51,6 +51,14 @@ export class ForoService {
   }
 
   addMember(member:String, title:String) {
-    return this.http.put(`${this.API}miembro/${title}`, member)
+    return this.http.post(`${this.API}foro/miembro/${title}/${member}`, {})
   }
+  
+  removeMember(member:String, title:String) {
+    return this.http.post(`${this.API}foro/quitarmiembro/${title}/${member}`, {})
+  }
+
+  //sendQuestion(question, title){
+    //return this.http.post(`${this.API}foro/`)
+  //}
 }

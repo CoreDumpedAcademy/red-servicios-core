@@ -16,8 +16,8 @@
       <ion-item>
           <p style="font-size: 16px">{{foro.description}}</p>
       </ion-item>
-      <!--<ion-button *ngIf="isAMember" expand="full" shape="round" (click)="unsubscribe()">Desuscribirse</ion-button>
-      <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button>-->
+      <ion-button *ngIf="isAMember" expand="full" shape="round" (click)="unsubscribe()">Desuscribirse</ion-button>
+      <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button>
       <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
    </ion-col>
   </ion-grid>
@@ -36,7 +36,7 @@
       </ion-grid>
   </ion-card>
   <ion-fab *ngIf="isAMember" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button>
+    <ion-fab-button (click)="post()">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

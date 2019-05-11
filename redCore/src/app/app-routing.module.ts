@@ -10,7 +10,8 @@ const routes: Routes = [
   { path: 'lista-preguntas', loadChildren: './foro/lista-preguntas/lista-preguntas.module#ListaPreguntasPageModule' },
   { path: 'lista-respuestas', loadChildren: './foro/lista-respuestas/lista-respuestas.module#ListaRespuestasPageModule' },
   { path: 'respuesta', loadChildren: './foro/respuesta/respuesta.module#RespuestaPageModule' },
-  { path: 'crear-foro', loadChildren: './foro/crear-foro/crear-foro.module#CrearForoPageModule' }
+  { path: 'crear-foro', loadChildren: './foro/crear-foro/crear-foro.module#CrearForoPageModule' },
+  { path: 'post', loadChildren: './foro/post/post.module#PostPageModule' }
 
 
 ];

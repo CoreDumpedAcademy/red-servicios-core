@@ -21,6 +21,6 @@ router.put('/status/:title', Foro.solveQuestion); // SIRVE PARA ACTIVAR O DESACT
 router.post('/respuesta/:title', Foro.addAnswer); // PASAR 'answer' Y 'pos'. AÑADE LA RESPUESTA 'answer' A LA PREGUNTA DE LA POSICION POS
 router.put('/respuesta/:title', Foro.editAnswer); // PASAR 'pos', 'answer' Y 'ans'. EDITA LA RESPUESTA EN POSICION 'ans' Y LA SUSTITUYE POR 'answer'
 // OTRO
-router.put('/miembro/:title', Foro.addMember);
-router.put('/quitarmiembro/:title', Foro.deleteMember);
+router.post('/miembro/:title/:member', Foro.addMember);
+router.post('/quitarmiembro/:title/:member', Foro.deleteMember);
 module.exports = router;

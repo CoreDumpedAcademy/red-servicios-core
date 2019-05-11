@@ -31,8 +31,10 @@ export class ListaPreguntasPage implements OnInit {
 
   hasLoaded=false
   currentUser:{
-    username:String,
-    picture:String
+    user: {
+      username:String,
+      picture:String
+    }
   }
   isAMember
   isAnAdmin
@@ -59,14 +61,16 @@ export class ListaPreguntasPage implements OnInit {
         this.foro.preguntas.reverse();
         this.auth.getEmail().then((email) =>{
           this.API.tieneCuenta(email).subscribe((user:{
-            username,
-            picture,
-            insignias:[],
-            rol:number,
+            user: {
+              username,
+              picture,
+              insignias:[],
+              rol:number,
+            }
           }) => {
             this.currentUser = user
-            this.isAMember = data.members.includes(this.currentUser.username)
-            this.isAnAdmin = data.members.includes(this.currentUser.username)
+            this.isAMember = data.members.includes(this.currentUser.user.username)
+            this.isAnAdmin = data.members.includes(this.currentUser.user.username)
           })
         })
         this.hasLoaded = true
@@ -87,8 +91,18 @@ export class ListaPreguntasPage implements OnInit {
   }
 
   subscribe() {
-    this.service.addMember(this.currentUser.username,this.foro.title).subscribe(() => { },
-    (error) => { console.log(error)
-    })
+    this.service.addMember(this.currentUser.user.username,this.foro.title).subscribe(() => { },
+    (error) => { console.log(error) })
+    window.location.reload()
+  }
+
+  unsubscribe() {
+    this.service.removeMember(this.currentUser.user.username,this.foro.title).subscribe(()=> { },
+    (error) => console.log(error))
+    window.location.reload()
+  }
+
+  post() {
+    this.router.navigateByUrl('post')
   }
 }

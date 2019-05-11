@@ -92,12 +92,13 @@ function addQuestion(req, res) {
 
 function addMember(req, res) {
   const { title } = req.params;
-  const member = req.body;
+  const { member } = req.params;
+  console.log(member)
   Foro.findOne({ title }, (err, foro) => {
     if (err) return res.status(500).send(err);
     if (!foro) return res.status(404).send('No existe el foro');
     if (member === undefined) return res.status(400).send('Debes enviar un miembro');
-    if (typeof member !== 'string') return res.status(400).send('member debe ser una string');
+    if (typeof member != 'string') return res.status(400).send('member debe ser una string');
     
     foro.members.push(member);
     Foro.update({ title }, foro, (err) => {
@@ -110,7 +111,7 @@ function addMember(req, res) {
 
 function deleteMember(req, res) {
   const { title } = req.params;
-  const member = req.body;
+  const { member } = req.params;
   Foro.findOne({ title }, (err, foro) => {
     if (err) return res.status(500).send(err);
     if (!foro) return res.status(404).send('No existe el foro');
