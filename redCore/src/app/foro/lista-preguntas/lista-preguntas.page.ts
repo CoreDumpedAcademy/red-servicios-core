@@ -56,6 +56,7 @@ export class ListaPreguntasPage implements OnInit {
         admins:[String]
       }) => {
         this.foro = data;
+        this.foro.preguntas.reverse();
         this.auth.getEmail().then((email) =>{
           this.API.tieneCuenta(email).subscribe((user:{
             username,
@@ -76,11 +77,12 @@ export class ListaPreguntasPage implements OnInit {
     })
   }
 
-  goToQuestion(index:String) {
-    
+  async goToQuestion(index:String) {
+    await this.service.setPreguntaAct(index)
+    this.router.navigateByUrl('lista-respuestas')
   }
 
-  ngOnInit() {
-    this.loadData();
+  async ngOnInit() {
+    await this.loadData();
   }
 }

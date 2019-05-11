@@ -34,6 +34,14 @@ export class ForoService {
     return this.storage.get('FORO')
   }
   
+  async setPreguntaAct(index) {
+    return this.storage.set('PREGUNTA', index)
+  }
+
+  async getPreguntaAct() {
+    return this.storage.get('PREGUNTA')
+  }
+  
   getPregunta() {
     return this.http.get(`${this.API}foro/pregunta/foroAct`)
   }

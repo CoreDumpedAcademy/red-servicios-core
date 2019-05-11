@@ -9,6 +9,8 @@ import { Router } from '@angular/router';
 })
 export class ListaRespuestasPage implements OnInit {
 
+  title:String
+
   pregunta:{
     user:{
       username:String,
@@ -18,7 +20,7 @@ export class ListaRespuestasPage implements OnInit {
     text:String,
     published:Date
     solved:Boolean,
-    datewhenSolved:Date,
+    datewhenSolved,
     respuestas:[
       {
         user:{
@@ -37,11 +39,47 @@ export class ListaRespuestasPage implements OnInit {
 
   }
 
-  async getData() {
-
+  async loadData() {
+    this.service.getForoAct().then((foro) => {
+      this.service.getPreguntaAct().then((index:number) => {
+        this.service.getForo(foro).subscribe((data:{
+          title:String,
+          description:String,
+          members: [String],
+          preguntas:[{
+            user:{
+              username:String,
+              picture:String
+            },
+            title:String,
+            text:String,
+            published:Date
+            solved:Boolean,
+            datewhenSolved:Date,
+            respuestas:[
+              {
+                user:{
+                  username:String,
+                  picture:String
+                },
+                text:String,
+                published:Date
+              }
+            ]
+          }],
+          created:Date,
+          admins:[String]
+        }) => {
+          this.title = data.title
+          this.pregunta = data.preguntas[index]
+          this.hasLoaded = true
+        })
+      })
+    })
   }
 
   ngOnInit() {
+    this.loadData()
   }
 
 }
