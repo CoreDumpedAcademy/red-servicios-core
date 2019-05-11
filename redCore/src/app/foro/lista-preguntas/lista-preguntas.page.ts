@@ -85,4 +85,10 @@ export class ListaPreguntasPage implements OnInit {
   async ngOnInit() {
     await this.loadData();
   }
+
+  subscribe() {
+    this.service.addMember(this.currentUser.username,this.foro.title).subscribe(() => { },
+    (error) => { console.log(error)
+    })
+  }
 }

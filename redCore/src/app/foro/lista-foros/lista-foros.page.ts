@@ -1,3 +1,5 @@
+import { APIService } from './../../api.service';
+import { AuthserviceService } from './../../authservice.service';
 import { Component, OnInit } from '@angular/core';
 import { ForoService } from '../foro.service';
 import { Router } from '@angular/router';
@@ -8,6 +10,12 @@ import { Router } from '@angular/router';
   styleUrls: ['./lista-foros.page.scss'],
 })
 export class ListaForosPage implements OnInit {
+
+  currentUser:{
+    user:{
+      rol:Number
+    }
+  }
 
   foros:[{
     title:String,
@@ -20,8 +28,9 @@ export class ListaForosPage implements OnInit {
     created:Date,
     admins:[String]
   }]
+  hasLoaded=false;
 
-  constructor(private foroserv: ForoService, private router: Router) { }
+  constructor(private foroserv: ForoService, private router: Router, private auth: AuthserviceService, private API: APIService ) { }
 
   async loadData(){
     this.foroserv.getForos().subscribe((data:[{
@@ -35,6 +44,18 @@ export class ListaForosPage implements OnInit {
       created:Date,
       admins:[String]}]) => {
       this.foros = data;
+      this.auth.getEmail().then((email) => {
+        this.API.tieneCuenta(email).subscribe((user:{
+          user:{
+            rol:Number
+          }
+        }) => {
+          this.currentUser = user
+          this.hasLoaded = true
+        })
+      }, (err) => {
+        this.router.navigateByUrl('login');
+      })
     }
     )
   }
@@ -47,5 +68,10 @@ export class ListaForosPage implements OnInit {
   ngOnInit() {
     this.loadData();
   }
+
+  createForo() {
+    this.router.navigateByUrl('crear-foro')
+  }
+
 
 }

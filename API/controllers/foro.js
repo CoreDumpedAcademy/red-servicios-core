@@ -90,6 +90,44 @@ function addQuestion(req, res) {
   });
 }
 
+function addMember(req, res) {
+  const { title } = req.params;
+  const member = req.body;
+  Foro.findOne({ title }, (err, foro) => {
+    if (err) return res.status(500).send(err);
+    if (!foro) return res.status(404).send('No existe el foro');
+    if (member === undefined) return res.status(400).send('Debes enviar un miembro');
+    if (typeof member !== 'string') return res.status(400).send('member debe ser una string');
+    
+    foro.members.push(member);
+    Foro.update({ title }, foro, (err) => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send('Miembro añadido');
+    })
+    return 'Ok'
+  })
+}
+
+function deleteMember(req, res) {
+  const { title } = req.params;
+  const member = req.body;
+  Foro.findOne({ title }, (err, foro) => {
+    if (err) return res.status(500).send(err);
+    if (!foro) return res.status(404).send('No existe el foro');
+    if (member === undefined) return res.status(400).send('Debes enviar un miembro');
+    if (typeof member !== 'string') return res.status(400).send('member debe ser una string');
+    
+    let index = foro.members.indexOf(member)
+    if (index > -1) foro.members.splice(index, 1)
+
+    Foro.update({ title }, foro, (err) => {
+      if (err) return res.status(500).send(err);
+      return res.status(200).send('Miembro eliminado');
+    })
+    return 'Ok'
+  })
+}
+
 function editQuestion(req, res) {
   const { title } = req.params;
   const { pos } = req.body;
@@ -232,4 +270,6 @@ module.exports = {
   getAnswer,
   addAnswer,
   editAnswer,
+  addMember,
+  deleteMember,
 };

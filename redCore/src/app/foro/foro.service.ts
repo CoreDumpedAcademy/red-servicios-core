@@ -41,8 +41,16 @@ export class ForoService {
   async getPreguntaAct() {
     return this.storage.get('PREGUNTA')
   }
-  
+
   getPregunta() {
     return this.http.get(`${this.API}foro/pregunta/foroAct`)
+  }
+
+  crearForo(foro) {
+    return this.http.post(`${this.API}foro/`, foro)
+  }
+
+  addMember(member:String, title:String) {
+    return this.http.put(`${this.API}miembro/${title}`, member)
   }
 }
