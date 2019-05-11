@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { APIService } from '../api.service';
@@ -9,10 +10,8 @@ import { AuthserviceService } from '../authservice.service';
 export class ForoService {
 
   API:String = 'http://localhost:3000/api/'
-  foroAct: String;
-  preguntaAct: Number;
 
-  constructor(private http: HttpClient, private service: APIService, private auth: AuthserviceService ) {}
+  constructor(private http: HttpClient, private service: APIService, private auth: AuthserviceService, private storage: Storage ) {}
 
   async getCurrentUser() {
     let email= await this.auth.getEmail()
@@ -23,8 +22,16 @@ export class ForoService {
     return this.http.get(`${this.API}foro/`)
   }
 
-  getForo() {
-    return this.http.get(`${this.API}foro/one/${this.foroAct}`)
+  getForo(title:String) {
+    return this.http.get(`${this.API}foro/one/${title}`)
+  }
+
+  async setForoAct(foroAct) {
+    return this.storage.set('FORO', foroAct)
+  }
+
+  async getForoAct() {
+    return this.storage.get('FORO')
   }
   
   getPregunta() {

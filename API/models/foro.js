@@ -26,7 +26,7 @@ const pregunta = Schema({
 const foro = Schema({
   title: { type: String, unique: true, required: true },
   description: String,
-  members: [user],
+  members: [String],
   preguntas: [pregunta],
   created: { type: Date, default: Date.now() },
   admins: [String], // Se guardan los emails de los admins

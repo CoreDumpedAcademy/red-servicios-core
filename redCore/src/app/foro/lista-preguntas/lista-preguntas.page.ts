@@ -1,3 +1,5 @@
+import { APIService } from './../../api.service';
+import { AuthserviceService } from './../../authservice.service';
 import { Component, OnInit } from '@angular/core';
 import { ForoService } from '../foro.service';
 import { Router } from '@angular/router';
@@ -9,15 +11,12 @@ import { Router } from '@angular/router';
 })
 export class ListaPreguntasPage implements OnInit {
 
-  constructor(private service: ForoService, private router: Router) { }
+  constructor(private service: ForoService, private router: Router, private auth: AuthserviceService, private API: APIService) { }
 
   foro: {
     title:String,
     description:String,
-    members: [{
-      username: String,
-      picture: String
-    }],
+    members: [String],
     preguntas:[{
       title:String,
       text:String,
@@ -31,67 +30,57 @@ export class ListaPreguntasPage implements OnInit {
   }
 
   hasLoaded=false
-  currentUser
+  currentUser:{
+    username:String,
+    picture:String
+  }
   isAMember
   isAnAdmin
 
-  async getData() {
-    await this.service.getForo().subscribe(async (data:{
-      title:String,
-      description:String,
-      members: [{
-        username: String,
-        picture: String
-      }],
-      preguntas:[{
+
+  async loadData() {
+    this.service.getForoAct().then((foroAct:String) => {
+      this.service.getForo(foroAct).subscribe((data:{
         title:String,
-        text:String,
-        published:Date,
-        solved:Boolean,
-        respuestas:[{}],
-        datewhenSolved:Date,
-      }],
-      created:Date,
-      admins:[String]
-    }) => {
-      this.foro = data
-      await this.service.getCurrentUser().then(
-        async (promise) => {
-          await promise.subscribe(async (user:{
-            user:{
-              username
-            }
+        description:String,
+        members: [String],
+        preguntas:[{
+          title:String,
+          text:String,
+          published:Date,
+          solved:Boolean,
+          respuestas:[{}],
+          datewhenSolved:Date,
+        }],
+        created:Date,
+        admins:[String]
+      }) => {
+        this.foro = data;
+        this.auth.getEmail().then((email) =>{
+          this.API.tieneCuenta(email).subscribe((user:{
+            username,
+            picture,
+            insignias:[],
+            rol:number,
           }) => {
-            this.currentUser = user.user.username
-            //this.isAMember = await this.isInTheArray(this.foro.members, user.user.username)
-            //this.isAnAdmin = await this.foro.admins.includes(user.user.username)
-            this.hasLoaded=true
+            this.currentUser = user
+            this.isAMember = data.members.includes(this.currentUser.username)
+            this.isAnAdmin = data.members.includes(this.currentUser.username)
           })
-        }
-      )
-    },
-    (err) => this.router.navigateByUrl('lista-foros'))
+        })
+        this.hasLoaded = true
+      }, (error) => {
+        console.log(error)
+        this.router.navigateByUrl('lista-foros')
+      })
+    })
   }
 
-  /*
-  isInTheArray(array:[{username:String}], user:{username:String}) {
-    for(let i = 0; i<array.length;i++){
-      console.log('owo')
-      if(array[i].username === user.username) return true
-    }
-    return false
-  }
-  */
-
-  goToQuestion(index:Number){
-    this.service.preguntaAct = index;
-    this.router.navigateByUrl('lista-respuestas')
+  goToQuestion(index:String) {
+    
   }
 
-  goBack() {
-    this.router.navigateByUrl('lista-foros')
-  }
-  async ngOnInit() {
-    await this.getData()
+  ngOnInit() {
+    this.loadData();
   }
 }

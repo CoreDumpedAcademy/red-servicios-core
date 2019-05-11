@@ -39,8 +39,8 @@ export class ListaForosPage implements OnInit {
     )
   }
 
-  gotoForo(title) {
-    this.foroserv.foroAct = title
+  async gotoForo(title) {
+    await this.foroserv.setForoAct(title)
     this.router.navigateByUrl('lista-preguntas');
   }
 

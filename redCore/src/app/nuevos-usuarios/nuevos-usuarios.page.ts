@@ -28,16 +28,21 @@ export class NuevosUsuariosPage implements OnInit {
         this.error = "Ya existe un usuario con ese nombre"
       },
       async err => {
-        let body = {
-          email: this.email,
-          username: form.value.username,
-        }
-        await this.api.registrarUsuario(body).subscribe((data) => {
-        },
-        (error) => {
-          this.router.navigateByUrl('');
-        }
-        )
+        this.auth.getUser().then((promise) => promise.subscribe(
+          async (data:{avatarImage:String}) => {
+            let body = {
+              email: this.email,
+              username: form.value.username,
+              picture: data.avatarImage
+            }
+            await this.api.registrarUsuario(body).subscribe((data) => {
+            },
+            (error) => {
+              this.router.navigateByUrl('');
+            }
+            )
+          }
+        ))
     })
   }
 

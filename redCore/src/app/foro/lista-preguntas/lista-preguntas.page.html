@@ -15,20 +15,24 @@
     <ion-col padding>
       <ion-item>
           <p style="font-size: 16px">{{foro.description}}</p>
-          <!--<ion-button *ngIf="isAMember" expand="full" shape="round">Desuscribirse</ion-button>
-          <ion-button *ngIf="!isAMember" expand="full" shape="round">Suscribirse</ion-button>
-          -->
       </ion-item>
+      <ion-button *ngIf="isAMember" expand="full" shape="round">Desuscribirse</ion-button>
+      <ion-button *ngIf="!isAMember" expand="full" shape="round">Suscribirse</ion-button>
       <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
    </ion-col>
   </ion-grid>
   <ion-card *ngFor="let pregunta of foro.preguntas; index as i" padding  (click)="goToQuestion(i)">
-    <h2>{{pregunta.title}}</h2>
-    <ion-item>
-      {{pregunta.text}}
-    </ion-item>
-    <ion-item>
-      <p text-left>{{pregunta.user.username}} - {{pregunta.published}} </p>
-    </ion-item>
+    <h2 text-center>{{pregunta.title}}</h2>
+      {{pregunta.text}}<br>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            {{pregunta.user.username}}
+          </ion-col>
+          <ion-col>
+            {{pregunta.published}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
   </ion-card>
 </ion-content>
