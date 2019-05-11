@@ -82,4 +82,7 @@ export class ListaRespuestasPage implements OnInit {
     this.loadData()
   }
 
+  contestar() {
+    this.router.navigateByUrl('respuesta')
+  }
 }

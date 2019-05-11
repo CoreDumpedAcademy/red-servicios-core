@@ -58,7 +58,11 @@ export class ForoService {
     return this.http.post(`${this.API}foro/quitarmiembro/${title}/${member}`, {})
   }
 
-  //sendQuestion(question, title){
-    //return this.http.post(`${this.API}foro/`)
-  //}
+  sendQuestion(question, title) {
+    return this.http.post(`${this.API}foro/pregunta/${title}`, question)
+  }
+
+  sendAnswer(body, title) { // BODY TIENE UN OBJETO 'answer' Y UN OBJETO 'pos'. POS REPRESENTA LA PREGUNTA
+    return this.http.post(`${this.API}foro/respuesta/${title}`, body)
+  }
 }

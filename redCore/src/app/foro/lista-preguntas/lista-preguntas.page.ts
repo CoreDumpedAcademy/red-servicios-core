@@ -24,6 +24,10 @@ export class ListaPreguntasPage implements OnInit {
       solved:Boolean,
       respuestas:[{}],
       datewhenSolved:Date,
+      user:{
+        username:String,
+        picture:String
+      }
     }],
     created:Date,
     admins:[String]
@@ -53,13 +57,16 @@ export class ListaPreguntasPage implements OnInit {
           solved:Boolean,
           respuestas:[{}],
           datewhenSolved:Date,
+          user:{
+            username:String,
+            picture:String,
+          }
         }],
         created:Date,
         admins:[String]
       }) => {
         this.foro = data;
-        this.foro.preguntas.reverse();
-        this.auth.getEmail().then((email) =>{
+        this.auth.getEmail().then((email) => {
           this.API.tieneCuenta(email).subscribe((user:{
             user: {
               username,
@@ -81,8 +88,8 @@ export class ListaPreguntasPage implements OnInit {
     })
   }
 
-  async goToQuestion(index:String) {
-    await this.service.setPreguntaAct(index)
+  async goToQuestion(index:number) {
+    await this.service.setPreguntaAct(Math.abs(index-(this.foro.preguntas.length-1)))
     this.router.navigateByUrl('lista-respuestas')
   }
 

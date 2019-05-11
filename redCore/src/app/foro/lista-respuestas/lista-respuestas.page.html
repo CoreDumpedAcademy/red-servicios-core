@@ -4,7 +4,7 @@
         <ion-menu-button></ion-menu-button>
       </ion-buttons>
       <ion-title>
-        {{title}}
+        {{pregunta.title}}
       </ion-title>
     </ion-toolbar>
   </ion-header>
@@ -53,7 +53,7 @@
   </ion-card>
   <ion-footer>
     <ion-grid>
-      <ion-button expand="full" shape="round" *ngIf="!pregunta.solved"> Contestar </ion-button>
+      <ion-button expand="full" shape="round" *ngIf="!pregunta.solved" (click)="contestar()"> Contestar </ion-button>
       <ion-card *ngIf="pregunta.solved">
         <ion-card-content>
           La pregunta ha sido marcada como respondida

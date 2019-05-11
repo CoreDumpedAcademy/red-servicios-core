@@ -13,7 +13,7 @@ import { NgForm } from '@angular/forms';
 export class PostPage implements OnInit {
 
   hasLoaded=false
-
+  foro
   currentUser:{
     username:String,
     picture:String
@@ -29,7 +29,10 @@ export class PostPage implements OnInit {
           picture:String
         }}) => {
         this.currentUser = cuenta.user
-        this.hasLoaded = true
+        this.service.getForoAct().then((foro) => {
+          this.foro = foro
+          this.hasLoaded = true
+        })
       })
     }, (err) => this.router.navigateByUrl('login'))
   }
@@ -39,7 +42,16 @@ export class PostPage implements OnInit {
   }
 
   sendData(form:NgForm) {
-    
+    let body = {
+      user: {
+        username: this.currentUser.username,
+        picture: this.currentUser.picture
+      },
+      title: form.form.value.title,
+      text: form.form.value.text
+    }
+    this.service.sendQuestion(body, this.foro).subscribe(() => {}, (err) => {console.log(err)})
+    this.router.navigateByUrl('lista-preguntas')
   }
 
 }
