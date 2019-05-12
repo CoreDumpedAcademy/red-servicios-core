@@ -10,11 +10,20 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+//Para imagen formulario
+import { NgxCroppieModule } from 'ngx-croppie';
 
 @NgModule({
     declarations: [AppComponent],
     entryComponents: [],
-    imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
+    imports: [
+            BrowserModule, 
+            IonicModule.forRoot(), 
+            AppRoutingModule, 
+            HttpClientModule, 
+            IonicStorageModule.forRoot(),
+            NgxCroppieModule
+        ],
     providers: [
         StatusBar,
         SplashScreen,
