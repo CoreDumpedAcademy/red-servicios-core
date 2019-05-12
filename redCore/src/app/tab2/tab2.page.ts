@@ -45,10 +45,10 @@ export class Tab2Page {
     }
 
     toAbout() {
-        this.router.navigateByUrl('about')
+        this.router.navigateByUrl('core/about')
     }
 
     gotoServices(){
-        this.router.navigateByUrl('servicios')
+        this.router.navigateByUrl('core/servicios')
     }
 }
