@@ -14,11 +14,11 @@ export class AppComponent {
   pages = [
     {
       title: 'Home',
-      url: '/menu/home'
+      url: '/core/home'
     },
     {
       title: 'Messages',
-      url: '/menu/messages'
+      url: '/core/messages'
     }
   ];
 
