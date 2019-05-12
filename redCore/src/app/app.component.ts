@@ -17,8 +17,12 @@ export class AppComponent {
       url: '/core/home'
     },
     {
-      title: 'Messages',
+      title: 'Mensajes',
       url: '/core/messages'
+    },
+    {
+      title: 'Servicios',
+      url: '/core/servicios'
     }
   ];
 

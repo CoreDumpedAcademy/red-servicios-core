@@ -85,6 +85,10 @@ export class ListaRespuestasPage implements OnInit {
     this.loadData()
   }
 
+  ionViewWillEnter(){
+   this.loadData()
+  }
+
   contestar() {
     this.router.navigateByUrl('respuesta')
   }

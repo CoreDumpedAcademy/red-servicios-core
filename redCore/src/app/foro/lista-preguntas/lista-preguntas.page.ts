@@ -109,6 +109,10 @@ export class ListaPreguntasPage implements OnInit {
     window.location.reload()
   }
 
+  ionViewWillEnter(){
+   this.loadData()
+  }
+
   post() {
     this.router.navigateByUrl('post')
   }

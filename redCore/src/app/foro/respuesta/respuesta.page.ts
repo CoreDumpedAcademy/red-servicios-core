@@ -107,7 +107,7 @@ export class RespuestaPage implements OnInit {
     }
     this.service.sendAnswer(body,this.title).subscribe(() => {},
     (err) => {console.log(err)})
-    this.router.navigateByUrl('lista-preguntas')
+    this.router.navigateByUrl('lista-respuestas')
   }
 
   ngOnInit() {
