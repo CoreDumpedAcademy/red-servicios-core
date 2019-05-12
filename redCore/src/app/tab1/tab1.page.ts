@@ -57,6 +57,9 @@ export class Tab1Page {
         this.user = data.user.username
         this.insignias = data.user.insignias
         this.rol = data.user.rol
+      },
+      () => {
+        this.router.navigateByUrl('login')
       }
     )
     this.auth.getUser().then(promise => promise.subscribe(
@@ -82,5 +85,8 @@ export class Tab1Page {
     await this.loadData();
   }
 
+  ionViewWillEnter(){
+   this.loadData()
+  }
 
 }

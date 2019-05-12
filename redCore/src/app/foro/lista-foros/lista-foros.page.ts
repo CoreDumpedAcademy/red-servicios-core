@@ -45,6 +45,9 @@ export class ListaForosPage implements OnInit {
       admins:[String]}]) => {
       this.foros = data;
       this.auth.getEmail().then((email) => {
+        if (email === null) {
+          this.router.navigateByUrl('login')
+        }
         this.API.tieneCuenta(email).subscribe((user:{
           user:{
             rol:Number
@@ -55,6 +58,8 @@ export class ListaForosPage implements OnInit {
         })
       }, (err) => {
         this.router.navigateByUrl('login');
+      }).catch((err) => {
+        this.router.navigateByUrl('login')
       })
     }
     )
@@ -71,6 +76,10 @@ export class ListaForosPage implements OnInit {
 
   createForo() {
     this.router.navigateByUrl('crear-foro')
+  }
+
+  ionViewWillEnter(){
+   this.loadData()
   }
 
 

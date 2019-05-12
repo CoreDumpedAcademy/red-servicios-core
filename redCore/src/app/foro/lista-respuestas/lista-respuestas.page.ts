@@ -41,6 +41,9 @@ export class ListaRespuestasPage implements OnInit {
 
   async loadData() {
     this.service.getForoAct().then((foro) => {
+      if (foro === null) {
+        this.router.navigateByUrl('lista-foros')
+      }
       this.service.getPreguntaAct().then((index:number) => {
         this.service.getForo(foro).subscribe((data:{
           title:String,
