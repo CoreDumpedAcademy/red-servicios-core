@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="hasLoaded">
   <ion-toolbar color="primary">
     <ion-buttons slot="start">
       <ion-menu-button></ion-menu-button>
@@ -9,7 +9,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content *ngIf="hasLoaded" padding>
     <ion-card-header  (click)="toAbout()" class="welcome-card" style="top: 0px">
         <ion-img src="/assets/logo_cd_white.png"></ion-img>
     </ion-card-header>
@@ -29,7 +29,6 @@
       <ion-slides [options]="sliderConfig">
         <ion-slide *ngFor="let item of json.items">
           <ion-card>
-            <ion-img src="{{item.img}}"></ion-img>
             <ion-card-header> <h2>{{item.title}}</h2> </ion-card-header>
             <ion-card-content> {{item.content}} </ion-card-content>
             <ion-chip color="primary">

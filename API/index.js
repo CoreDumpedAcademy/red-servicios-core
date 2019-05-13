@@ -9,11 +9,6 @@ let feed = null;
 
 (async () => {
   feed = await parser.parseURL('https://coredumped.es/rss');
-  console.log(feed.title);
-
-  feed.items.forEach((item) => {
-    console.log(`${item.title}:${item.link}`);
-  });
 })();
 
 app.get('/rss', (req, res) => {
