@@ -23,6 +23,17 @@ export class AuthserviceService {
     }
     return this.http.get(`${this.AUTH_SERVER_ADRESS}/user/`, httpOptions)
   }
+  
+  //Registrar usuario
+  addUser(user){
+    this.http.post(`${this.AUTH_SERVER_ADRESS}/register`,{
+      picture: user.img,
+      name: user.firstName,
+      password: user.password,
+      username: user.lastName,
+      email: user.email
+    })
+  }
 
   async getEmail() {
     let mail = this.storage.get("EMAIL")

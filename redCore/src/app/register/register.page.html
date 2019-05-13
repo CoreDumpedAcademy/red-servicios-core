@@ -1,5 +1,6 @@
 <ion-content>
-    <form #form="ngForm" (ngSubmit) = "register(form)">
+   
+    <form #form="ngForm" (ngSubmit) = "register()">
       <ion-grid>
         <ion-row color="" justify-content-center>
           <ion-col align-self-centered size-md="6" size-lg="5" size-xs="12">
@@ -7,21 +8,35 @@
               <h3>¡Estás apunto de crear un usuario!</h3>
               Con tu cuenta tendrás acceso a todos los servicios de Core. Rellena el siguiente formulario para crear tu cuenta
             </div>
+
               <div padding>
+                <!--Foto de perfil -->
+                  <ion-card>
+                      <img *ngIf="!fileUrl" src="assets/no-image.png"/>
+                      <img *ngIf="fileUrl" src="{{ fileUrl }}"/>
+                      <ion-card-content>
+                        <ion-button color="medium" size="large" (click)="cropUpload()">
+                          <ion-icon slot="icon-only" name="camera"></ion-icon>
+                        </ion-button>
+                      </ion-card-content>
                 <ion-item>
-                  <ion-input name="userName" type="text" placeholder="Nombre de usuario" ngModel required></ion-input>
+                  <ion-input name = "img" type="file" [id]="pic" [(ngModel)]="user.img" (ionInput)="updatePicture($event)"></ion-input>
+                </ion-item>
+              </ion-card>
+                <ion-item>
+                  <ion-input name="userName" type="text" placeholder="Nombre de usuario" [(ngModel)]="user.userName"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input name="name" type="text" placeholder="Nombre"></ion-input>
+                  <ion-input name="name" type="text" placeholder="Nombre" [(ngModel)]="user.name"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input name="email" type="email" placeholder="example@example.com" ngModel required></ion-input>
+                  <ion-input name="email" type="email" placeholder="example@example.com" [(ngModel)]="user.email"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input name="password" type="password" placeholder="Password" ngModel required></ion-input>
+                  <ion-input name="password" type="password" placeholder="Password" [(ngModel)]="user.password"></ion-input>
                 </ion-item>
                 <ion-item>
-                  <ion-input name="confirm" type="password" placeholder="Password again" ngModel required></ion-input>
+                  <ion-input name="confirm" type="password" placeholder="Password again" [(ngModel)]="user.confirm"></ion-input>
                 </ion-item>
               </div>
               <div padding>
