@@ -36,7 +36,7 @@ export class RegisterPage implements OnInit {
     fileUrl: any = null;
     respData: any;
 
-  //Funcion camara
+  //Funcion camara adaptar formato
   cropUpload() {
     this.imagePicker.getPictures({ maximumImagesCount: 1, outputType: 0 }).then((results) => {
       for (let i = 0; i < results.length; i++) {

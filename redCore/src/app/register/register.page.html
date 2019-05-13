@@ -10,9 +10,9 @@
             </div>
 
               <div padding>
-                <!--Foto de perfil
+                <!--Foto de perfil -->
                   <ion-card>
-                      <img *ngIf="!fileUrl" src="assets/no-image.jpeg"/>
+                      <img *ngIf="!fileUrl" src="assets/no-image.png"/>
                       <img *ngIf="fileUrl" src="{{fileUrl}}"/>
                       <ion-card-content>
                         <ion-button color="medium" size="large" (click)="cropUpload()">
@@ -20,7 +20,7 @@
                         </ion-button>
                       </ion-card-content>
                     </ion-card>
-                      -->
+                     
                 <ion-item>
                   <ion-input name = "img" type="file" [id]="pic" [(ngModel)]="user.img"></ion-input>
                 </ion-item>
