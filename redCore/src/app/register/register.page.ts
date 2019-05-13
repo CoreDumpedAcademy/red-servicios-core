@@ -7,6 +7,7 @@ import { Form } from '@angular/forms';
 import { Crop } from '@ionic-native/crop/ngx';
 import { ImagePicker } from '@ionic-native/image-picker/ngx';
 import { FileTransfer, FileUploadOptions, FileTransferObject } from '@ionic-native/file-transfer/ngx';
+import { fileURLToPath } from 'url';
 
 @Component({
   selector: 'app-register',
@@ -66,6 +67,14 @@ export class RegisterPage implements OnInit {
       }
     }, (err) => { console.log(err); });
   }
+
+  
+ updatePicture($event) : void {
+  var re = /C:\\fakepath\\/i; 
+  var str = $event.target.value;
+  var newstr = str.replace(re, "..\\..\\assets\\"); 
+  this.fileUrl = newstr;
+ }
 
   ngOnInit() {
   }
