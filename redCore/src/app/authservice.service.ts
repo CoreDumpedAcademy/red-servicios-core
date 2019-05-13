@@ -26,7 +26,7 @@ export class AuthserviceService {
   
   //Registrar usuario
   addUser(user){
-    this.http.post(`${this.AUTH_SERVER_ADRESS}/user/`,{
+    this.http.post(`${this.AUTH_SERVER_ADRESS}/`,{
       picture: user.img,
       name: user.firstName,
       password: user.password,
