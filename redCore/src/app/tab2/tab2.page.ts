@@ -1,5 +1,6 @@
 import {Component} from '@angular/core';
-import { Router } from '@angular/router';
+import {Router} from '@angular/router';
+import {RssService} from '../rss.service';
 
 @Component({
     selector: 'app-tab2',
@@ -7,6 +8,7 @@ import { Router } from '@angular/router';
     styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+    hasLoaded = false;
 
     sliderConfig = {
         loop: false,
@@ -14,41 +16,45 @@ export class Tab2Page {
         spaceBetween: 5,
         centeredSlides: true,
         slidesPerView: 1.2
-      }
+    };
 
-    public contents: [{
-        img: String,
-        title: String,
-        msg: String
-    }]
+    json: {
+        items: [{
+            img: string,
+            title: string,
+            link: string,
+            content: string
+        }];
+    };
 
-    constructor(private router: Router) {
-        this.contents = [{
-            img : '/assets/MicrosoftF82.jpg',
-            title : 'Tecnologías de Microsoft',
-            // tslint:disable-next-line:max-line-length
-            msg : 'El lunes 29 de abril a las 16:00h en el aula 3006 del Campus Sur de la UPM. Evento gratuito ¿Quieres aprender sobre cómo Microsoft hace lo que…'
-            }
-        ]
-        this.contents.push({
-            img : '/assets/photo_2019-04-04.jpg',
-            title : 'La Curiosidad No Mató Al Gato, Ep. 7: Más pesados que el agujero negro de Messier 87',
-            msg : '¡Escúchalo en iVoox y suscríbete!'
-        })
-        this.contents.push(
-        {
-            img : '/assets/photo65972961570564334.jpg',
-            title : 'Carta del presidente',
-            msg : 'Sobre la filosofía de la asociación “Core Dumped es un espacio joven, ' +
-                'abierto y gratuito que incentiva el aprendizaje y el desarrollo de proyectos más allá de lo…'
-        })
+    constructor(private router: Router, private rss: RssService) {
+    }
+
+    loadRss() {
+        this.rss.getData().subscribe(((dato: {
+            items: [{
+                img: string,
+                title: string,
+                link: string,
+                content: string
+            }];
+        }) => {
+            this.json = dato;
+            this.hasLoaded = true;
+            console.log(this.json);
+        }));
     }
 
     toAbout() {
-        this.router.navigateByUrl('core/about')
+        this.router.navigateByUrl('core/about');
     }
 
-    gotoServices(){
-        this.router.navigateByUrl('core/servicios')
+    gotoServices() {
+        this.router.navigateByUrl('core/servicios');
+    }
+
+    // tslint:disable-next-line:use-life-cycle-interface
+    ngOnInit() {
+        this.loadRss();
     }
 }

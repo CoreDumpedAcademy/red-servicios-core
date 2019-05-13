@@ -27,14 +27,14 @@
     </ion-item>
     <ion-item>
       <ion-slides [options]="sliderConfig">
-        <ion-slide *ngFor="let article of contents">
+        <ion-slide *ngFor="let item of json.items">
           <ion-card>
-            <ion-img src="{{article.img}}"></ion-img>
-            <ion-card-header> <h2>{{article.title}}</h2> </ion-card-header>
-            <ion-card-content> {{article.msg}} </ion-card-content>
+            <ion-img src="{{item.img}}"></ion-img>
+            <ion-card-header> <h2>{{item.title}}</h2> </ion-card-header>
+            <ion-card-content> {{item.content}} </ion-card-content>
             <ion-chip color="primary">
                 <ion-label>Leer más</ion-label>
-              </ion-chip>              
+              </ion-chip>
           </ion-card>
         </ion-slide>
       </ion-slides>
