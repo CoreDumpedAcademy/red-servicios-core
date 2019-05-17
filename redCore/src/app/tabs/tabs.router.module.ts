@@ -66,7 +66,7 @@ const routes: Routes = [
         children:[
         {
           path: '',
-          loadChildren: './servicios/servicios.module#ServiciosPageModule'
+          loadChildren: '../servicios/servicios.module#ServiciosPageModule'
         }
         ]
       },
@@ -75,7 +75,7 @@ const routes: Routes = [
         children:[
         {
           path: '',
-          loadChildren: './login/login.module#LoginPageModule'
+          loadChildren: '../login/login.module#LoginPageModule'
         }
         ]
       },
