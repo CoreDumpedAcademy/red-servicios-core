@@ -56,8 +56,8 @@ const routes: Routes = [
         path: 'register',
         children:[
         {
-          path: '', 
-          loadChildren: '../register/register.module#RegisterPageModule' 
+          path: '',
+          loadChildren: '../register/register.module#RegisterPageModule'
         }
         ]
       },
@@ -65,7 +65,7 @@ const routes: Routes = [
         path: 'servicios',
         children:[
         {
-          path: '', 
+          path: '',
           loadChildren: './servicios/servicios.module#ServiciosPageModule'
         }
         ]
@@ -74,7 +74,7 @@ const routes: Routes = [
         path: 'login',
         children:[
         {
-          path: '', 
+          path: '',
           loadChildren: './login/login.module#LoginPageModule'
         }
         ]
@@ -84,7 +84,6 @@ const routes: Routes = [
         redirectTo: '/core/home',
         pathMatch: 'full'
       }
-     
     ]
   },
   {

@@ -17,32 +17,18 @@ export class Tab2Page {
         centeredSlides: true,
         slidesPerView: 1.2
     };
-
-    json: {
-        items: [{
-            img: string,
-            title: string,
-            link: string,
-            content: string
-        }];
-    };
+    items: any;
 
     constructor(private router: Router, private rss: RssService) {
     }
 
     loadRss() {
-        this.rss.getData().subscribe(((dato: {
-            items: [{
-                img: string,
-                title: string,
-                link: string,
-                content: string
-            }];
-        }) => {
-            this.json = dato;
+        this.rss.getData().subscribe(data => {
+            this.items = data;
             this.hasLoaded = true;
-            console.log(this.json);
-        }));
+        }, err => {
+            console.log(err);
+        });
     }
 
     toAbout() {

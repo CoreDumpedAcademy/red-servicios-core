@@ -6,12 +6,12 @@ import {HttpClient} from '@angular/common/http';
 })
 export class RssService {
 
-    api = 'http://localhost:3000/';
+    api = 'https://coredumped.es/wp-json/wp/v2/posts';
 
     constructor(private http: HttpClient) {
     }
 
     getData() {
-        return this.http.get(`${this.api}rss`);
+        return this.http.get(`${this.api}`);
     }
 }
