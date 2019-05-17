@@ -3,7 +3,6 @@ const colors = require('colors');
 const mongoose = require('mongoose');
 const app = require('./app');
 
-
 // Conexión a la base de datos y en el puerto 3000
 const port = process.env.port || 3000;
 

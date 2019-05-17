@@ -9,7 +9,7 @@
     </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content *ngIf="hasLoaded" padding>
     <ion-card-header (click)="toAbout()" class="welcome-card" style="top: 0px">
         <ion-img src="/assets/logo_cd_white.png"></ion-img>
     </ion-card-header>
@@ -29,7 +29,8 @@
         <ion-slides [options]="sliderConfig">
             <ion-slide *ngFor="let item of items">
                 <ion-card>
-                    <ion-img class="News-Header" *ngIf="item.jetpack_featured_media_url != '' " src={{item.jetpack_featured_media_url}} alt="News Image"></ion-img>
+                    <ion-img class="News-Header" *ngIf="item.jetpack_featured_media_url != '' "
+                             src={{item.jetpack_featured_media_url}} alt="News Image"></ion-img>
                     <ion-card-header><h2> {{item.title.rendered}} </h2></ion-card-header>
                     <ion-card-content [innerHTML]="item.excerpt.rendered"></ion-card-content>
                     <ion-chip color="primary">
