@@ -12,5 +12,21 @@
 
 
 .active-item {
-    border-left: 8px solid var(--ion-color-primary);
+    border-left: 3px solid var(--ion-color-primary);
+    background-color: var(--ion-color-primary);
+}
+ion-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+   img {
+    width: 100%;
+    margin-top: 8px;
+    height: 27px;
+   }
+}
+
+#banner {
+    .user-avatar {
+        padding: .5em;
+    }
 }
