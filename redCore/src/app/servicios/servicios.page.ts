@@ -18,4 +18,8 @@ export class ServiciosPage implements OnInit {
         this.router.navigateByUrl('lista-foros');
     }
 
+    goToNevera() {
+        this.router.navigateByUrl('nevera');
+    }
+
 }

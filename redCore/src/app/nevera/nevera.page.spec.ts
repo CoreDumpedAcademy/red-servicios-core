@@ -1,27 +1,22 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Storage} from '@ionic/storage';
-import {RespuestaPage} from './respuesta.page';
-import {HttpClient, HttpHandler} from '@angular/common/http';
 
-describe('RespuestaPage', () => {
-    let component: RespuestaPage;
-    let fixture: ComponentFixture<RespuestaPage>;
+import {NeveraPage} from './nevera.page';
+
+describe('NeveraPage', () => {
+    let component: NeveraPage;
+    let fixture: ComponentFixture<NeveraPage>;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [RespuestaPage],
+            declarations: [NeveraPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [],
-            providers: [
-                HttpClient, HttpHandler, Storage
-            ]
         })
             .compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(RespuestaPage);
+        fixture = TestBed.createComponent(NeveraPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });

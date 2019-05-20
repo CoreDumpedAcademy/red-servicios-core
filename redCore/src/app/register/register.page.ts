@@ -1,7 +1,7 @@
-import {AuthserviceService} from './../authservice.service';
+import {AuthserviceService} from '../authservice.service';
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {Form} from '@angular/forms';
+import {NgForm} from '@angular/forms';
 
 @Component({
     selector: 'app-register',
@@ -9,6 +9,7 @@ import {Form} from '@angular/forms';
     styleUrls: ['./register.page.scss'],
 })
 export class RegisterPage implements OnInit {
+    form: NgForm;
 
     constructor(private router: Router, private auth: AuthserviceService) {
     }
@@ -16,7 +17,7 @@ export class RegisterPage implements OnInit {
     ngOnInit() {
     }
 
-    register(form: Form) {
+    register(form) {
 
     }
 

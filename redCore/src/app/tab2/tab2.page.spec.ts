@@ -12,6 +12,10 @@ describe('Tab2Page', () => {
         TestBed.configureTestingModule({
             declarations: [Tab2Page],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [],
+            providers: [
+                Router
+            ]
         }).compileComponents();
     }));
 
@@ -26,15 +30,6 @@ describe('Tab2Page', () => {
     });
 });
 
-/*describe('Test for Tab2', () => {
-
-    describe('Test to loadRss', () => {
-        it('should return 0', () => {
-            expect(Tab2Page.).toBe(0);
-        });
-    });
-});*/
-
 describe('Setup', () => {
     let injector: TestBed;
     let component: Tab2Page;
@@ -43,8 +38,8 @@ describe('Setup', () => {
 
     beforeEach(() => {
         TestBed.configureTestingModule({
-            imports: [],
-            providers: [Tab2Page, Router, RssService]
+            imports: [ Router, RssService ],
+            providers: [Tab2Page, Router]
         });
         injector = getTestBed();
         component = injector.get(Tab2Page);

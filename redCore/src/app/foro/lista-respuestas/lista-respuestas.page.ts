@@ -1,95 +1,95 @@
-import { ForoService } from './../foro.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {ForoService} from '../foro.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-lista-respuestas',
-  templateUrl: './lista-respuestas.page.html',
-  styleUrls: ['./lista-respuestas.page.scss'],
+    selector: 'app-lista-respuestas',
+    templateUrl: './lista-respuestas.page.html',
+    styleUrls: ['./lista-respuestas.page.scss'],
 })
 export class ListaRespuestasPage implements OnInit {
 
-  title:String
+    title: string;
 
-  pregunta:{
-    user:{
-      username:String,
-      picture:String
-    },
-    title:String,
-    text:String,
-    published:Date
-    solved:Boolean,
-    datewhenSolved,
-    respuestas:[
-      {
-        user:{
-          username:String,
-          picture:String
+    pregunta: {
+        user: {
+            username: string,
+            picture: string
         },
-        text:String,
-        published:Date
-      }
-    ]
-  }
-
-  hasLoaded=false
-
-  constructor(private service: ForoService, private router: Router) {
-
-  }
-
-  async loadData() {
-    this.service.getForoAct().then((foro) => {
-      if (foro === null) {
-        this.router.navigateByUrl('lista-foros')
-      }
-      this.service.getPreguntaAct().then((index:number) => {
-        this.service.getForo(foro).subscribe((data:{
-          title:String,
-          description:String,
-          members: [String],
-          preguntas:[{
-            user:{
-              username:String,
-              picture:String
-            },
-            title:String,
-            text:String,
-            published:Date
-            solved:Boolean,
-            datewhenSolved:Date,
-            respuestas:[
-              {
-                user:{
-                  username:String,
-                  picture:String
+        title: string,
+        text: string,
+        published: Date
+        solved: boolean,
+        datewhenSolved,
+        respuestas: [
+            {
+                user: {
+                    username: string,
+                    picture: string
                 },
-                text:String,
-                published:Date
-              }
+                text: string,
+                published: Date
+            }
             ]
-          }],
-          created:Date,
-          admins:[String]
-        }) => {
-          this.title = data.title
-          this.pregunta = data.preguntas[index]
-          this.hasLoaded = true
-        })
-      })
-    })
-  }
+    };
 
-  ngOnInit() {
-    this.loadData()
-  }
+    hasLoaded = false;
 
-  ionViewWillEnter(){
-   this.loadData()
-  }
+    constructor(private service: ForoService, private router: Router) {
 
-  contestar() {
-    this.router.navigateByUrl('respuesta')
-  }
+    }
+
+    async loadData() {
+        this.service.getForoAct().then((foro) => {
+            if (foro === null) {
+                this.router.navigateByUrl('lista-foros');
+            }
+            this.service.getPreguntaAct().then((index: number) => {
+                this.service.getForo(foro).subscribe((data: {
+                    title: string,
+                    description: string,
+                    members: [string],
+                    preguntas: [{
+                        user: {
+                            username: string,
+                            picture: string
+                        },
+                        title: string,
+                        text: string,
+                        published: Date
+                        solved: boolean,
+                        datewhenSolved: Date,
+                        respuestas: [
+                            {
+                                user: {
+                                    username: string,
+                                    picture: string
+                                },
+                                text: string,
+                                published: Date
+                            }
+                            ]
+                    }],
+                    created: Date,
+                    admins: [string]
+                }) => {
+                    this.title = data.title;
+                    this.pregunta = data.preguntas[index];
+                    this.hasLoaded = true;
+                });
+            });
+        });
+    }
+
+    ngOnInit() {
+        this.loadData();
+    }
+
+    ionViewWillEnter() {
+        this.loadData();
+    }
+
+    contestar() {
+        this.router.navigateByUrl('respuesta');
+    }
 }

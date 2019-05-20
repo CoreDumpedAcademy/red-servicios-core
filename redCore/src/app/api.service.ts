@@ -1,22 +1,23 @@
-import { Storage } from '@ionic/storage';
-import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import {Storage} from '@ionic/storage';
+import {HttpClient} from '@angular/common/http';
+import {Injectable} from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class APIService {
 
-  API:String = "http://localhost:3000/api/"
+    API = 'http://localhost:3000/api/';
 
-  constructor(private http: HttpClient, private storage: Storage) { }
+    constructor(private http: HttpClient, private storage: Storage) {
+    }
 
-  tieneCuenta(email:String) {
-    return this.http.get(`${this.API}user/${email}`)
-  }
+    tieneCuenta(email: string) {
+        return this.http.get(`${this.API}user/${email}`);
+    }
 
-  registrarUsuario(body) {
-    return this.http.post(`${this.API}user/`, body)
-  }
+    registrarUsuario(body) {
+        return this.http.post(`${this.API}user/`, body);
+    }
 
 }

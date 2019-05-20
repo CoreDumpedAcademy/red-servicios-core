@@ -1,27 +1,32 @@
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
-import { ListaPreguntasPage } from './lista-preguntas.page';
+import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
+import {Storage} from '@ionic/storage';
+import {ListaPreguntasPage} from './lista-preguntas.page';
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
 describe('ListaPreguntasPage', () => {
-  let component: ListaPreguntasPage;
-  let fixture: ComponentFixture<ListaPreguntasPage>;
+    let component: ListaPreguntasPage;
+    let fixture: ComponentFixture<ListaPreguntasPage>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ ListaPreguntasPage ],
-      schemas: [CUSTOM_ELEMENTS_SCHEMA],
-    })
-    .compileComponents();
-  }));
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [ListaPreguntasPage],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [],
+            providers: [
+                HttpClient, HttpHandler, Storage
+            ]
+        })
+            .compileComponents();
+    }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(ListaPreguntasPage);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    beforeEach(() => {
+        fixture = TestBed.createComponent(ListaPreguntasPage);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+    it('should create', () => {
+        expect(component).toBeTruthy();
+    });
 });

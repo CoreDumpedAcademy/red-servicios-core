@@ -1,48 +1,48 @@
 <ion-header *ngIf="hasLoaded">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title>
-      {{foro.title}}
-    </ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            {{foro.title}}
+        </ion-title>
+    </ion-toolbar>
 </ion-header>
 
 
 <ion-content *ngIf="hasLoaded">
-  <ion-grid>
-    <ion-col padding>
-      <ion-item>
-          <p style="font-size: 16px">{{foro.description}}</p>
-      </ion-item>
-      <ion-button *ngIf="isAMember" expand="full" shape="round" (click)="unsubscribe()">Desuscribirse</ion-button>
-      <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button>
-      <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
-   </ion-col>
-  </ion-grid>
-  <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding  (click)="goToQuestion(i)">
-    <h2 text-center>{{pregunta.title}}</h2>
     <ion-grid>
-        <ion-item>
-          <ion-col>
-            <ion-avatar>
-              <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
-            </ion-avatar>
-          </ion-col>
-          <ion-col>
-          {{pregunta.user.username}}
-          </ion-col>
-          <ion-col>
-          {{pregunta.published}}
-          </ion-col>
-        </ion-item>
-      </ion-grid>
-      <ion-card-content>{{pregunta.text}}</ion-card-content>
-  </ion-card>
-  <ion-fab *ngIf="isAMember" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="post()">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+        <ion-col padding>
+            <ion-item>
+                <p style="font-size: 16px">{{foro.description}}</p>
+            </ion-item>
+            <ion-button *ngIf="isAMember" expand="full" shape="round" (click)="unsubscribe()">Desuscribirse</ion-button>
+            <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button>
+            <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
+        </ion-col>
+    </ion-grid>
+    <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding (click)="goToQuestion(i)">
+        <h2 text-center>{{pregunta.title}}</h2>
+        <ion-grid>
+            <ion-item>
+                <ion-col>
+                    <ion-avatar>
+                        <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
+                    </ion-avatar>
+                </ion-col>
+                <ion-col>
+                    {{pregunta.user.username}}
+                </ion-col>
+                <ion-col>
+                    {{pregunta.published}}
+                </ion-col>
+            </ion-item>
+        </ion-grid>
+        <ion-card-content>{{pregunta.text}}</ion-card-content>
+    </ion-card>
+    <ion-fab *ngIf="isAMember" vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="post()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

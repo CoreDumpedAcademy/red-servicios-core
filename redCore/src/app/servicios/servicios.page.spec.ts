@@ -1,7 +1,7 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {ServiciosPage} from './servicios.page';
+import {Router} from '@angular/router';
 
 describe('ServiciosPage', () => {
     let component: ServiciosPage;
@@ -11,6 +11,10 @@ describe('ServiciosPage', () => {
         TestBed.configureTestingModule({
             declarations: [ServiciosPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [],
+            providers: [
+                Router
+            ]
         })
             .compileComponents();
     }));

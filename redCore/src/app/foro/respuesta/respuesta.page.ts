@@ -1,116 +1,122 @@
-import { ForoService } from './../foro.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { NgForm } from '@angular/forms';
+import {ForoService} from '../foro.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-respuesta',
-  templateUrl: './respuesta.page.html',
-  styleUrls: ['./respuesta.page.scss'],
+    selector: 'app-respuesta',
+    templateUrl: './respuesta.page.html',
+    styleUrls: ['./respuesta.page.scss'],
 })
 export class RespuestaPage implements OnInit {
 
-  constructor(private service: ForoService, private router: Router) { }
-
-  currentUser:{
-    user:{
-      username:String,
-      picture:String
+    constructor(private service: ForoService, private router: Router) {
     }
-  }
 
-  pregunta:{
-    user:{
-      username:String,
-      picture:String
-    },
-    title:String,
-    text:String,
-    published:Date
-    solved:Boolean,
-    datewhenSolved,
-    respuestas:[
-      {
-        user:{
-          username:String,
-          picture:String
-        },
-        text:String,
-        published:Date
-      }
-    ]
-  }
-  index:number
-  hasLoaded=false
-  title:String
+    form: NgForm;
 
-  loadData() {
-    this.service.getCurrentUser().then((promise) => {
-      promise.subscribe((user:{
-        user:{
-          username:String,
-          picture:String
+    currentUser: {
+        user: {
+            username: string,
+            picture: string
         }
-      }) => {
-        this.currentUser = user
-        this.service.getForoAct().then((foro) => {
-          this.service.getPreguntaAct().then((index:number) => {
-            this.service.getForo(foro).subscribe((data:{
-              title:String,
-              description:String,
-              members: [String],
-              preguntas:[{
-                user:{
-                  username:String,
-                  picture:String
-                },
-                title:String,
-                text:String,
-                published:Date
-                solved:Boolean,
-                datewhenSolved:Date,
-                respuestas:[
-                  {
-                    user:{
-                      username:String,
-                      picture:String
-                    },
-                    text:String,
-                    published:Date
-                  }
-                ]
-              }],
-              created:Date,
-              admins:[String]
-            }) => {
-              this.title = data.title
-              this.pregunta = data.preguntas[index]
-              this.index = index
-              this.hasLoaded = true
-            })
-          })
-        })
-      })
-    })
-  }
+    };
 
-  sendData(form:NgForm) {
-    let body = {
-      answer:{
-        user:{
-          username: this.currentUser.user.username,
-          picture: this.currentUser.user.picture
+    pregunta: {
+        user: {
+            username: string,
+            picture: string
         },
-        text: form.form.value.text
-      },
-      pos:this.index
-    }
-    this.service.sendAnswer(body,this.title).subscribe(() => {},
-    (err) => {console.log(err)})
-    this.router.navigateByUrl('lista-respuestas')
-  }
+        title: string,
+        text: string,
+        published: Date
+        solved: boolean,
+        datewhenSolved,
+        respuestas: [
+            {
+                user: {
+                    username: string,
+                    picture: string
+                },
+                text: string,
+                published: Date
+            }
+            ]
+    };
+    index: number;
+    hasLoaded = false;
+    title: string;
 
-  ngOnInit() {
-    this.loadData()
-  }
+    loadData() {
+        this.service.getCurrentUser().then((promise) => {
+            promise.subscribe((user: {
+                user: {
+                    username: string,
+                    picture: string
+                }
+            }) => {
+                this.currentUser = user;
+                this.service.getForoAct().then((foro) => {
+                    this.service.getPreguntaAct().then((index: number) => {
+                        this.service.getForo(foro).subscribe((data: {
+                            title: string,
+                            description: string,
+                            members: [string],
+                            preguntas: [{
+                                user: {
+                                    username: string,
+                                    picture: string
+                                },
+                                title: string,
+                                text: string,
+                                published: Date
+                                solved: boolean,
+                                datewhenSolved: Date,
+                                respuestas: [
+                                    {
+                                        user: {
+                                            username: string,
+                                            picture: string
+                                        },
+                                        text: string,
+                                        published: Date
+                                    }
+                                    ]
+                            }],
+                            created: Date,
+                            admins: [string]
+                        }) => {
+                            this.title = data.title;
+                            this.pregunta = data.preguntas[index];
+                            this.index = index;
+                            this.hasLoaded = true;
+                        });
+                    });
+                });
+            });
+        });
+    }
+
+    sendData(form: NgForm) {
+        const body = {
+            answer: {
+                user: {
+                    username: this.currentUser.user.username,
+                    picture: this.currentUser.user.picture
+                },
+                text: form.form.value.text
+            },
+            pos: this.index
+        };
+        this.service.sendAnswer(body, this.title).subscribe(() => {
+            },
+            (err) => {
+                console.log(err);
+            });
+        this.router.navigateByUrl('lista-respuestas');
+    }
+
+    ngOnInit() {
+        this.loadData();
+    }
 }

@@ -1,53 +1,55 @@
-import { AuthserviceService } from './../authservice.service';
-import { Storage } from '@ionic/storage';
-import { APIService } from './../api.service';
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {AuthserviceService} from '../authservice.service';
+import {Storage} from '@ionic/storage';
+import {APIService} from '../api.service';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {NgForm} from '@angular/forms';
 
 @Component({
-  selector: 'app-nuevos-usuarios',
-  templateUrl: './nuevos-usuarios.page.html',
-  styleUrls: ['./nuevos-usuarios.page.scss'],
+    selector: 'app-nuevos-usuarios',
+    templateUrl: './nuevos-usuarios.page.html',
+    styleUrls: ['./nuevos-usuarios.page.scss'],
 })
 export class NuevosUsuariosPage implements OnInit {
 
-  error:String = ""
-  email:String
+    error = '';
+    email: string;
+    form: NgForm;
 
-  constructor(private api: APIService, private router: Router, private storage: Storage,
-    private auth: AuthserviceService) {
-    storage.get('EMAIL').then(data => this.email = data)
-   }
+    constructor(private api: APIService, private router: Router, private storage: Storage,
+                private auth: AuthserviceService) {
+        storage.get('EMAIL').then(data => this.email = data);
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  async createAcc(form) {
-    await this.api.tieneCuenta(form.value.username).subscribe(
-      data => {
-        this.error = "Ya existe un usuario con ese nombre"
-      },
-      async err => {
-        this.auth.getUser().then((promise) => promise.subscribe(
-          async (data:{avatarImage:String}) => {
-            let body = {
-              email: this.email,
-              username: form.value.username,
-              picture: data.avatarImage
-            }
-            await this.api.registrarUsuario(body).subscribe((data) => {
+    async createAcc(form) {
+        await this.api.tieneCuenta(form.value.username).subscribe(
+            data => {
+                this.error = 'Ya existe un usuario con ese nombre';
             },
-            (error) => {
-              this.router.navigateByUrl('');
-            }
-            )
-          }
-        ))
-    })
-  }
+            async err => {
+                this.auth.getUser().then((promise) => promise.subscribe(
+                    async (data: { avatarImage: string }) => {
+                        const body = {
+                            email: this.email,
+                            username: form.value.username,
+                            picture: data.avatarImage
+                        };
+                        await this.api.registrarUsuario(body).subscribe((data) => {
+                            },
+                            (error) => {
+                                this.router.navigateByUrl('');
+                            }
+                        );
+                    }
+                ));
+            });
+    }
 
-  goBack() {
-    this.router.navigateByUrl('login')
-  }
+    goBack() {
+        this.router.navigateByUrl('login');
+    }
 
 }
