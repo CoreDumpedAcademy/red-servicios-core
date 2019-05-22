@@ -1,8 +1,9 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-import {Storage} from '@ionic/storage';
+import {IonicStorageModule} from '@ionic/storage';
 import {ListaRespuestasPage} from './lista-respuestas.page';
 import {HttpClient, HttpHandler} from '@angular/common/http';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('ListaRespuestasPage', () => {
     let component: ListaRespuestasPage;
@@ -12,10 +13,8 @@ describe('ListaRespuestasPage', () => {
         TestBed.configureTestingModule({
             declarations: [ListaRespuestasPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
-            imports: [],
-            providers: [
-                HttpClient, HttpHandler, Storage
-            ]
+            imports: [IonicStorageModule.forRoot(), RouterTestingModule],
+            providers: [HttpClient, HttpHandler]
         })
             .compileComponents();
     }));

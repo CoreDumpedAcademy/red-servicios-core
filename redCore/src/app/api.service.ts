@@ -9,7 +9,7 @@ export class APIService {
 
     API = 'http://localhost:3000/api/';
 
-    constructor(private http: HttpClient, private storage: Storage) {
+    constructor(private http: HttpClient) {
     }
 
     tieneCuenta(email: string) {

@@ -26,7 +26,6 @@ export class CrearForoPage implements OnInit {
         }
     };
     err = '';
-    form: NgForm;
 
     loadData() {
         this.auth.getEmail().then((email) => {

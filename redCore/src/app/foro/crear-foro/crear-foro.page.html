@@ -10,24 +10,22 @@
 </ion-header>
 
 <ion-content>
-    <form (ngSubmit)="sendData(form)">
+    <form #form="ngForm" (ngSubmit)="sendData(form)">
         <ion-grid>
             <ion-row>
-                <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                <ion-col align-self-center sizeMd="6" sizeLg="5" sizeXs="12">
                     <div text-center>
                         <h2>Herramienta de creación de foros de Core Dumped</h2>
                     </div>
                     <div padding>
                         <ion-item>
-                            <ion-input name="title" type="title" placeholder="Nombre del foro" ngModel
-                                       required></ion-input>
+                            <ion-input name="title" type="title" placeholder="Nombre del foro" ngModel required></ion-input>
                         </ion-item>
                         <ion-item>
-                            <ion-textarea placeholder="Descripción del foro" name="description" type="descritcion"
-                                          ngModel required></ion-textarea>
+                            <ion-textarea placeholder="Descripción del foro" name="description" type="descritcion" ngModel required></ion-textarea>
                         </ion-item>
                     </div>
-                    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                    <ion-col align-self-center sizeMd="6" sizeLg="5" sizeXs="12">
                         <div text-center>
                             {{err}}
                         </div>
