@@ -1,45 +1,64 @@
 <ion-header>
-    <ion-toolbar color="primary">
+    <ion-toolbar color = "primary">
         <ion-buttons slot="start">
             <ion-menu-button></ion-menu-button>
         </ion-buttons>
-        <ion-title>
-            Home
-        </ion-title>
+        <ion-title>Home</ion-title>
     </ion-toolbar>
 </ion-header>
 
-<ion-content *ngIf="hasLoaded" padding>
-    <ion-card-header (click)="toAbout()" class="welcome-card" style="top: 0px">
-        <ion-img src="/assets/logo_cd_white.png"></ion-img>
-    </ion-card-header>
-    <ion-button (click)="gotoServices()" shape="round" expand="full"> Servicios</ion-button>
-    <ion-item>
-        <ion-grid>
-            <h2 text-center>Calendario</h2>
-        </ion-grid>
-    </ion-item>
-    <ion-img src="../../assets/calendario-mayo-2019.png"></ion-img>
-    <ion-item>
-        <ion-grid>
-            <h2 text-center>Noticias</h2>
-        </ion-grid>
-    </ion-item>
-    <ion-item>
-        <ion-slides [options]="sliderConfig">
-            <ion-slide *ngFor="let item of items">
-                <ion-card>
-                    <ion-img class="News-Header" *ngIf="item.jetpack_featured_media_url != '' "
-                             src={{item.jetpack_featured_media_url}} alt="News Image"></ion-img>
-                    <ion-card-header><h2> {{item.title.rendered}} </h2></ion-card-header>
-                    <ion-card-content [innerHTML]="item.excerpt.rendered"></ion-card-content>
-                    <ion-chip color="primary">
-                        <ion-label>
-                            <a href="#"> Leer Más </a>
-                        </ion-label>
-                    </ion-chip>
-                </ion-card>
-            </ion-slide>
-        </ion-slides>
-    </ion-item>
+<ion-content *ngIf="hasLoaded" >
+        <ion-card (click)="expandItem(banner)" *ngFor="let banner of banners">
+            
+                <ion-card-content>
+                        <img src= "../../assets/banners/{{ banner.img }}">
+                    <app-expandable expandHeight="300px" [expanded]="banner.expanded">
+                   
+                  
+                    <ion-img *ngIf="banner.category==='calendario'" src="../../assets/calendario-mayo-2019.png"></ion-img>
+
+                    <ion-item *ngIf="banner.category==='destacados'">
+                            <ion-slides [options]="sliderConfig">
+                                <ion-slide *ngFor="let item of items">
+                                    <ion-card>
+                                        <ion-img class="News-Header" *ngIf="item.jetpack_featured_media_url != '' "
+                                                 src={{item.jetpack_featured_media_url}} alt="News Image"></ion-img>
+                                        <ion-card-header><h2> {{item.title.rendered}} </h2></ion-card-header>
+                                        <ion-card-content [innerHTML]="item.excerpt.rendered"></ion-card-content>
+                                        <ion-chip color="primary">
+                                            <ion-label>
+                                                <a href="#"> Leer Más </a>
+                                            </ion-label>
+                                        </ion-chip>
+                                    </ion-card>
+                                </ion-slide>
+                            </ion-slides>
+                    </ion-item>
+                    <ion-item *ngIf="banner.category==='podcasts'">
+                            <ion-slides [options]="sliderConfig">
+                                <ion-slide *ngFor="let item of items">
+                                    <ion-card>
+                                        <ion-img class="News-Header" *ngIf="item.jetpack_featured_media_url != '' "
+                                                 src={{item.jetpack_featured_media_url}} alt="News Image"></ion-img>
+                                        <ion-card-header><h2> {{item.title.rendered}} </h2></ion-card-header>
+                                        <ion-card-content [innerHTML]="item.excerpt.rendered"></ion-card-content>
+                                        <ion-chip color="primary">
+                                            <ion-label>
+                                                <a href="#"> Leer Más </a>
+                                            </ion-label>
+                                        </ion-chip>
+                                    </ion-card>
+                                </ion-slide>
+                            </ion-slides>
+                    </ion-item>
+                    <ion-item *ngIf="banner.category==='apuntate'">
+                            <ion-title>Not available</ion-title>
+                    </ion-item>
+
+
+
+                    </app-expandable>
+                </ion-card-content>
+        </ion-card>
+
 </ion-content>

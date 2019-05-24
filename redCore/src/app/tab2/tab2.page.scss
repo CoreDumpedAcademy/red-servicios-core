@@ -1,3 +1,24 @@
+.scroll-content {
+  overflow-y: hidden;
+}
+
+ion-header {
+  ion-toolbar{
+  height: 50px;
+  ion-title {
+   margin: auto;
+  }
+  }
+}
+ion-content {
+  ion-card-content {
+    img {
+      max-height: 95px;
+    }
+  }
+  
+}
+
 .welcome-card ion-img {
   max-height: 35vh;
 }

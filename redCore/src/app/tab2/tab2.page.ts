@@ -8,6 +8,31 @@ import {RssService} from '../rss.service';
     styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
+
+    banners= [
+        {
+            category: 'destacados',
+            img: 'destacados.png',
+            expanded: false
+        },
+        {
+            category: 'podcasts',
+            img: 'podcasts.png',
+            expanded: false
+        },
+        {
+            category: 'calendario',
+            img: 'calendario.png',
+            expanded: false
+        },
+        {
+            category: 'apuntate',
+            img: 'apuntate.png',
+            expanded: false
+        }
+    ]
+
+    
     hasLoaded = false;
 
     sliderConfig = {
@@ -20,7 +45,23 @@ export class Tab2Page {
     items: any;
 
     constructor(private router: Router, private rss: RssService) {
+       
     }
+
+    expandItem(banner): void {
+        if (banner.expanded) {
+          banner.expanded = false;
+        } else {
+          this.banners.map(listItem => {
+            if (banner == listItem) {
+              listItem.expanded = !listItem.expanded;
+            } else {
+              listItem.expanded = false;
+            }
+            return listItem;
+          });
+        }
+      }
 
     loadRss() {
         this.rss.getData().subscribe(data => {
