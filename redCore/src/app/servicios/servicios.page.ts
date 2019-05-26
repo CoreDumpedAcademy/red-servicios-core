@@ -1,24 +1,25 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
 
 @Component({
-  selector: 'app-servicios',
-  templateUrl: './servicios.page.html',
-  styleUrls: ['./servicios.page.scss'],
+    selector: 'app-servicios',
+    templateUrl: './servicios.page.html',
+    styleUrls: ['./servicios.page.scss'],
 })
 export class ServiciosPage implements OnInit {
 
-  constructor(private router: Router) { }
+    constructor(private router: Router) {
+    }
 
-  ngOnInit() {
-  }
+    ngOnInit() {
+    }
 
-  goToForos() {
-    this.router.navigateByUrl('lista-foros')
-  }
+    goToForos() {
+        this.router.navigateByUrl('lista-foros');
+    }
 
-  goToNevera(){
-    this.router.navigateByUrl('nevera')
-  }
+    goToNevera() {
+        this.router.navigateByUrl('nevera');
+    }
 
 }

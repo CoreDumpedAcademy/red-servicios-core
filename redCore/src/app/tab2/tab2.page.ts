@@ -9,6 +9,7 @@ import {RssService} from '../rss.service';
 })
 export class Tab2Page {
     hasLoaded = false;
+    items: [{}];
 
     sliderConfig = {
         loop: false,
@@ -17,13 +18,12 @@ export class Tab2Page {
         centeredSlides: true,
         slidesPerView: 1.2
     };
-    items: any;
 
     constructor(private router: Router, private rss: RssService) {
     }
 
     loadRss() {
-        this.rss.getData().subscribe(data => {
+        this.rss.getData().subscribe((data: [{}]) => {
             this.items = data;
             this.hasLoaded = true;
         }, err => {

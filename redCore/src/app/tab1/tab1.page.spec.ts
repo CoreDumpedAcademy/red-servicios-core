@@ -1,7 +1,9 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
 import {Tab1Page} from './tab1.page';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClient, HttpHandler} from '@angular/common/http';
+import {IonicStorageModule} from '@ionic/storage';
 
 describe('Tab1Page', () => {
     let component: Tab1Page;
@@ -11,6 +13,8 @@ describe('Tab1Page', () => {
         TestBed.configureTestingModule({
             declarations: [Tab1Page],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [IonicStorageModule.forRoot(), RouterTestingModule],
+            providers: [HttpClient, HttpHandler]
         }).compileComponents();
     }));
 

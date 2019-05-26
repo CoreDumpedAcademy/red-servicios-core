@@ -1,23 +1,25 @@
 <ion-header *ngIf="hasLoaded">
     <ion-toolbar color="primary">
-      <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons>
-      <ion-title>
-        Foros
-      </ion-title>
+        <ion-buttons slot="start">
+            <ion-menu-button></ion-menu-button>
+        </ion-buttons>
+        <ion-title>
+            Foros
+        </ion-title>
     </ion-toolbar>
-  </ion-header>
+</ion-header>
 
 <ion-content *ngIf="hasLoaded">
-  <ion-card *ngFor="let foro of foros; index as i" padding>
-    <p style="font-size: 25px; text-align: center">{{foro.title}}</p>
-    <p style="font-size: 20px; text-align: center">{{foro.description}}</p>
-    <ion-button expand="full" shape="round" (click)="gotoForo(foro.title)">Ir al foro</ion-button>
-  </ion-card>
-  <ion-footer no-shadow>
-    <ion-grid>
-      <ion-button *ngIf="currentUser.user.rol.valueOf() > 0" expand="full" shape="round" (click)="createForo()">Crear foro</ion-button>
-    </ion-grid>
-  </ion-footer>
+    <ion-card *ngFor="let foro of foros; index as i" padding>
+        <p style="font-size: 25px; text-align: center">{{foro.title}}</p>
+        <p style="font-size: 20px; text-align: center">{{foro.description}}</p>
+        <ion-button expand="full" shape="round" (click)="gotoForo(foro.title)">Ir al foro</ion-button>
+    </ion-card>
+    <ion-footer no-shadow>
+        <ion-grid>
+            <ion-button *ngIf="currentUser.user.rol.valueOf() > 0" expand="full" shape="round" (click)="createForo()">
+                Crear foro
+            </ion-button>
+        </ion-grid>
+    </ion-footer>
 </ion-content>

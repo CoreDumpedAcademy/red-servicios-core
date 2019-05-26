@@ -1,7 +1,9 @@
 import {CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
-import {async, ComponentFixture, TestBed} from '@angular/core/testing';
-
+import {async, ComponentFixture, getTestBed, TestBed} from '@angular/core/testing';
 import {Tab2Page} from './tab2.page';
+import {IonicStorageModule} from '@ionic/storage';
+import {RouterTestingModule} from '@angular/router/testing';
+import {HttpClient, HttpHandler} from '@angular/common/http';
 
 describe('Tab2Page', () => {
     let component: Tab2Page;
@@ -11,6 +13,8 @@ describe('Tab2Page', () => {
         TestBed.configureTestingModule({
             declarations: [Tab2Page],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [IonicStorageModule.forRoot(), RouterTestingModule],
+            providers: [HttpClient, HttpHandler]
         }).compileComponents();
     }));
 
@@ -24,4 +28,3 @@ describe('Tab2Page', () => {
         expect(component).toBeTruthy();
     });
 });
-

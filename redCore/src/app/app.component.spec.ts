@@ -6,6 +6,7 @@ import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 import {StatusBar} from '@ionic-native/status-bar/ngx';
 
 import {AppComponent} from './app.component';
+import {RouterTestingModule} from '@angular/router/testing';
 
 describe('AppComponent', () => {
 
@@ -18,6 +19,7 @@ describe('AppComponent', () => {
         platformSpy = jasmine.createSpyObj('Platform', {ready: platformReadySpy});
 
         TestBed.configureTestingModule({
+            imports: [RouterTestingModule],
             declarations: [AppComponent],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             providers: [
