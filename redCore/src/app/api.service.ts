@@ -1,6 +1,6 @@
 import { Storage } from '@ionic/storage';
-import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
@@ -11,8 +11,15 @@ export class APIService {
 
   constructor(private http: HttpClient, private storage: Storage) { }
 
-  tieneCuenta(email:String) {
-    return this.http.get(`${this.API}user/${email}`)
+  async tieneCuenta(email:String) {
+    const token = await this.storage.get("TOKEN")
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Authorization' : 'Bearer '+token
+      })
+    }
+    return this.http.get(`${this.API}user/${email}`, httpOptions)
   }
 
   registrarUsuario(body) {

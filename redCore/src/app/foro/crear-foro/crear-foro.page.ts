@@ -28,21 +28,24 @@ export class CrearForoPage implements OnInit {
 
   loadData() {
     this.auth.getEmail().then((email) => {
-      this.API.tieneCuenta(email).subscribe((cuenta:{
-        user:{
-          cuentas:{},
-          email:String,
-          insignias:[{}],
-          picture:String,
-          rol:Number,
-          username:String
-        }
-      }) => {
-        this.currentUser = cuenta;
-        if (cuenta.user.rol <= 0) this.router.navigateByUrl('')
+      this.API.tieneCuenta(email).then((promise) => {
+        promise.subscribe((cuenta:{
+          user:{
+            cuentas:{},
+            email:String,
+            insignias:[{}],
+            picture:String,
+            rol:Number,
+            username:String
+          }
+        }) => {
+          this.currentUser = cuenta;
+          if (cuenta.user.rol <= 0) this.router.navigateByUrl('')
+        },
+        (error) => {
+        this.router.navigateByUrl('login')
+        })
       })
-    }, (error) => {
-      this.router.navigateByUrl('login')
     })
   }
 

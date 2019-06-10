@@ -67,17 +67,19 @@ export class ListaPreguntasPage implements OnInit {
       }) => {
         this.foro = data;
         this.auth.getEmail().then((email) => {
-          this.API.tieneCuenta(email).subscribe((user:{
-            user: {
-              username,
-              picture,
-              insignias:[],
-              rol:number,
-            }
-          }) => {
-            this.currentUser = user
-            this.isAMember = data.members.includes(this.currentUser.user.username)
-            this.isAnAdmin = data.members.includes(this.currentUser.user.username)
+          this.API.tieneCuenta(email).then((promise) => {
+            promise.subscribe((user:{
+              user: {
+                username,
+                picture,
+                insignias:[],
+                rol:number,
+              }
+            }) => {
+              this.currentUser = user
+              this.isAMember = data.members.includes(this.currentUser.user.username)
+              this.isAnAdmin = data.members.includes(this.currentUser.user.username)
+            })
           })
         })
         this.hasLoaded = true

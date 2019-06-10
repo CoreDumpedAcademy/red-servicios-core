@@ -17,10 +17,12 @@ export class LoginPage implements OnInit {
   async login(form) {
     this.auth.login(form.value).subscribe((res) => {
       if(this.auth.isLoggedIn()){
-        this.api.tieneCuenta(form.value.email).subscribe((data) => {
-          this.router.navigateByUrl('');
-        }, (err) => {
-          this.router.navigateByUrl('nuevos-usuarios')
+        this.api.tieneCuenta(form.value.email).then((promise) => {
+          promise.subscribe((data) => {
+            this.router.navigateByUrl('');
+          }, (err) => {
+            this.router.navigateByUrl('nuevos-usuarios')
+          })
         })
       } else {
         alert("jo")

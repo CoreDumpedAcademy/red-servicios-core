@@ -5,13 +5,13 @@ const { Schema } = mongoose;
 const Insignia = Schema({
   nombre: { type: String },
   descripcion: { type: String },
-  id: { type: String, unique: true, required: true },
+  id: { type: String },
 });
 
 const UserSchema = Schema({
   email: { type: String, required: true, unique: true },
   username: { type: String, unique: true, required: true },
-  insignias: [{ type: Insignia, unique: true }],
+  insignias: [{ type: Insignia }],
   cuentas: {
     telegram: { type: String, default: '' },
     biblioteca: { type: String, default: '' },

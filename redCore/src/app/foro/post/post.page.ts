@@ -23,15 +23,17 @@ export class PostPage implements OnInit {
 
   loadData() {
     this.auth.getEmail().then((email) => {
-      this.API.tieneCuenta(email).subscribe((cuenta:{
-        user:{
-          username:String,
-          picture:String
-        }}) => {
-        this.currentUser = cuenta.user
-        this.service.getForoAct().then((foro) => {
-          this.foro = foro
-          this.hasLoaded = true
+      this.API.tieneCuenta(email).then((promise) => {
+        promise.subscribe((cuenta:{
+          user:{
+            username:String,
+            picture:String
+          }}) => {
+          this.currentUser = cuenta.user
+          this.service.getForoAct().then((foro) => {
+            this.foro = foro
+            this.hasLoaded = true
+          })
         })
       })
     }, (err) => this.router.navigateByUrl('login'))

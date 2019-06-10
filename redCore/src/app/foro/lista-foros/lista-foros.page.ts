@@ -48,13 +48,15 @@ export class ListaForosPage implements OnInit {
         if (email === null) {
           this.router.navigateByUrl('login')
         }
-        this.API.tieneCuenta(email).subscribe((user:{
-          user:{
-            rol:Number
-          }
-        }) => {
-          this.currentUser = user
-          this.hasLoaded = true
+        this.API.tieneCuenta(email).then((promise) => {
+          promise.subscribe((user:{
+            user:{
+              rol:Number
+            }
+          }) => {
+            this.currentUser = user
+            this.hasLoaded = true
+          })
         })
       }, (err) => {
         this.router.navigateByUrl('login');

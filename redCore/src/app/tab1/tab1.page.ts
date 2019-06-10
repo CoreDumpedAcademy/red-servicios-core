@@ -36,32 +36,34 @@ export class Tab1Page {
 
   async loadData() {
     this.email = await this.auth.getEmail();
-    this.API.tieneCuenta(this.email).subscribe(
-      (data:{
-        user:{
-          cuentas:{
-            telegram:String,
-            biblioteca:String,
-            slack:String
-          },
-          email:String,
-          rol:Number
-          insignias:[{
-            nombre:String,
-            descripcion:String,
-            id:Number
-          }],
-          username:String
+    this.API.tieneCuenta(this.email).then((promise) => {
+      promise.subscribe(
+        (data:{
+          user:{
+            cuentas:{
+              telegram:String,
+              biblioteca:String,
+              slack:String
+            },
+            email:String,
+            rol:Number
+            insignias:[{
+              nombre:String,
+              descripcion:String,
+              id:Number
+            }],
+            username:String
+          }
+        }) => {
+          this.user = data.user.username
+          this.insignias = data.user.insignias
+          this.rol = data.user.rol
+        },
+        () => {
+          this.router.navigateByUrl('login')
         }
-      }) => {
-        this.user = data.user.username
-        this.insignias = data.user.insignias
-        this.rol = data.user.rol
-      },
-      () => {
-        this.router.navigateByUrl('login')
-      }
-    )
+      )
+    })
     this.auth.getUser().then(promise => promise.subscribe(
       (data:{
         avatarImage:String,
