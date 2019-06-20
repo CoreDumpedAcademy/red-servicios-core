@@ -5,7 +5,7 @@ const { Schema } = mongoose;
 const Insignia = Schema({
   nombre: { type: String },
   descripcion: { type: String },
-  id: { type: String },
+  imagen: { type: String },
 });
 
 const UserSchema = Schema({
