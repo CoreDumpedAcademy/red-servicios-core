@@ -40,6 +40,7 @@ export class AuthserviceService {
         token: String,
         isAdmin: Boolean
       }) => {
+        console.log(user.email)
         if(res.token) {
           await this.storage.set("TOKEN", res.token);
           await this.storage.set("EMAIL", user.email);

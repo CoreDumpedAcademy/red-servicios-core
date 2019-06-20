@@ -15,11 +15,10 @@ export class NuevosUsuariosPage implements OnInit {
   email:String
 
   constructor(private api: APIService, private router: Router, private storage: Storage,
-    private auth: AuthserviceService) {
-    storage.get('EMAIL').then(data => this.email = data)
-   }
+    private auth: AuthserviceService) { }
 
   ngOnInit() {
+    this.storage.get('EMAIL').then(data => this.email = data);
   }
 
   async createAcc(form) {

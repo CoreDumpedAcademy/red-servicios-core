@@ -26,4 +26,12 @@ export class APIService {
     return this.http.post(`${this.API}user/`, body)
   }
 
+  checkUser (username:String) {
+    return this.http.get(`${this.API}check/username/${username}`);
+  }
+
+  checkMail (email:String) {
+    return this.http.get(`${this.API}check/email/${email}`);
+  }
+
 }

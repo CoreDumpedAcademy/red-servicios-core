@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { APIService } from './../api.service';
 import { Component, OnInit } from '@angular/core';
 import { AuthserviceService } from '../authservice.service';
@@ -12,23 +13,21 @@ export class LoginPage implements OnInit {
 
   err:String = ""
 
-  constructor(private auth: AuthserviceService, private router: Router, private api: APIService) { }
+  constructor(private auth: AuthserviceService, private router: Router, private api: APIService,
+    private storage: Storage) { }
 
   async login(form) {
-    this.auth.login(form.value).subscribe((res) => {
-      if(this.auth.isLoggedIn()){
-        this.api.tieneCuenta(form.value.email).then((promise) => {
-          promise.subscribe((data) => {
-            this.router.navigateByUrl('');
-          }, (err) => {
-            this.router.navigateByUrl('nuevos-usuarios')
-          })
-        })
-      } else {
-        alert("jo")
-      }
-    }, (err) => {
-      this.err = "Usuario o contraseña incorrectos"
+    this.auth.login(form.value).subscribe(() => {
+      this.api.checkMail(form.value.email).subscribe(
+        () => {
+          this.storage.set('EMAIL', form.value.email);
+          this.router.navigateByUrl('');
+        },
+        () => {
+          this.router.navigateByUrl('nuevos-usuarios');
+      })
+    }, () => {
+      this.err = 'Usuario o contraseña incorrecta';
     })
   }
 

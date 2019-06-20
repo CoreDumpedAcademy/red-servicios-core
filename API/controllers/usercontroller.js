@@ -43,9 +43,29 @@ function editUser(req, res) {
   });
 }
 
+function emailUsado(req, res) {
+  const { email } = req.params;
+  UserSchema.findOne({ email }, (err, user) => {
+    if (err) return res.status(500).send(err);
+    if (!user) return res.status(404).send('NO EXISTE');
+    return res.status(200).send('');
+  });
+}
+
+function userUsado(req, res) {
+  const { username } = req.params;
+  UserSchema.findOne({ username }, (err, user) => {
+    if (err) return res.status(500).send(err);
+    if (!user) return res.status(404).send('NO EXISTE');
+    return res.status(200).send('');
+  });
+}
+
 module.exports = {
   addUser,
   getUsers,
   editUser,
   getUser,
+  emailUsado,
+  userUsado,
 };
