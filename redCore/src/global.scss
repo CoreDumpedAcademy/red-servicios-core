@@ -12,5 +12,36 @@
 
 
 .active-item {
-    border-left: 8px solid var(--ion-color-primary);
+    border-left: 3px solid var(--ion-color-primary);
+    background-color: var(--ion-color-primary);
+}
+ion-menu{
+ion-col {
+    height: 30px;
+    
+    ion-avatar {
+        margin: auto;
+        width:100% !important;
+        height : 100% !important;
+        max-width: 100px !important;  //any size
+        max-height: 100px !important;
+    }
+
+}
+
+ion-title {
+    margin-top: 5px;
+    margin-bottom: 5px;
+   img {
+    width: 100%;
+    margin-top: 8px;
+    height: 27px;
+   }
+}
+}
+
+#banner {
+    .user-avatar {
+        padding: .5em;
+    }
 }

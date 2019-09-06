@@ -13,20 +13,24 @@ export class AppComponent {
 
   pages = [
     {
-      title: 'Home',
-      url: '/core/home'
+      title: 'Calendario',
+      url: '/core/home',
+      icon: 'ios-calendar'
     },
     {
-      title: 'Mensajes',
-      url: '/core/messages'
+      title: 'Nevera',
+      url: '/nevera',
+      icon: 'ios-cart'
     },
     {
-      title: 'Servicios',
-      url: '/core/servicios'
+      title: 'Foros',
+      url: '/lista-foros',
+      icon: 'ios-chatbubbles'
     }
   ];
 
   selectedPath = '';
+  picture:String
 
   constructor(
     private platform: Platform,

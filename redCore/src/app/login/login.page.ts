@@ -20,7 +20,6 @@ export class LoginPage implements OnInit {
     this.auth.login(form.value).subscribe(() => {
       this.api.checkMail(form.value.email).subscribe(
         () => {
-          this.storage.set('EMAIL', form.value.email);
           this.router.navigateByUrl('');
         },
         () => {
