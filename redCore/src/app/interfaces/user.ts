@@ -14,5 +14,7 @@ export interface User {
     }],
     username: string,
     picture: string;
+    balance: number,
+    status: string;
   };
 }

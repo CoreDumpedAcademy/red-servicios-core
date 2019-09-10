@@ -14,13 +14,13 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
   }
-  
-  register(form:Form){
+
+  register(form: Form) {
 
   }
 
-  goBack(){
-    this.router.navigateByUrl('login')
+  goBack() {
+    this.router.navigateByUrl('login');
   }
 
 }

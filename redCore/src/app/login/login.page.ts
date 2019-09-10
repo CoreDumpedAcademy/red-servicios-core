@@ -11,10 +11,14 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  err:String = ""
+  err = '';
 
-  constructor(private auth: AuthserviceService, private router: Router, private api: APIService,
-    private storage: Storage) { }
+  constructor(
+    private auth: AuthserviceService,
+    private router: Router,
+    private api: APIService,
+    private storage: Storage
+    ) { }
 
   async login(form) {
     this.auth.login(form.value).subscribe(() => {
@@ -24,10 +28,10 @@ export class LoginPage implements OnInit {
         },
         () => {
           this.router.navigateByUrl('nuevos-usuarios');
-      })
+      });
     }, () => {
       this.err = 'Usuario o contraseña incorrecta';
-    })
+    });
   }
 
   goBack() {

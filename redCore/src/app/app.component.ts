@@ -52,11 +52,9 @@ export class AppComponent {
         this.selectedPath = event.url;
       }
     });
-
     this.auth.getEmail().then((email) => {
       this.service.tieneCuenta(email).then(promise => {
         promise.subscribe((data: User) => {
-          console.log(data);
           this.picture = 'http://fridge.coredumped.es' + data.user.picture;
           this.username = data.user.username;
         });

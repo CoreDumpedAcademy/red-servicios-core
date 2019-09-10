@@ -11,11 +11,11 @@ export class Tab2Page {
     hasLoaded = false;
 
     sliderConfig = {
-        loop: false,
-        initialSlide: 0,
-        spaceBetween: 5,
-        centeredSlides: true,
-        slidesPerView: 1.2
+      loop: false,
+      initialSlide: 0,
+      spaceBetween: 5,
+      centeredSlides: true,
+      slidesPerView: 1.2
     };
     items: any;
 
@@ -23,16 +23,16 @@ export class Tab2Page {
     }
 
     loadRss() {
-        this.rss.getData().subscribe(data => {
-            this.items = data;
-            this.hasLoaded = true;
-        }, err => {
-            console.log(err);
-        });
+      this.rss.getData().subscribe(data => {
+        this.items = data;
+        this.hasLoaded = true;
+      }, err => {
+        console.log(err);
+      });
     }
 
     toAbout() {
-        this.router.navigateByUrl('core/about');
+      this.router.navigateByUrl('core/about');
     }
 
     gotoServices() {

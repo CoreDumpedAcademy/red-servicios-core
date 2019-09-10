@@ -14,11 +14,11 @@ export class ServiciosPage implements OnInit {
   }
 
   goToForos() {
-    this.router.navigateByUrl('lista-foros')
+    this.router.navigateByUrl('lista-foros');
   }
 
-  goToNevera(){
-    this.router.navigateByUrl('nevera')
+  goToNevera() {
+    this.router.navigateByUrl('nevera');
   }
 
 }

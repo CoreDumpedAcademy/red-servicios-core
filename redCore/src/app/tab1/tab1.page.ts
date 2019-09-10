@@ -13,17 +13,13 @@ import { User } from '../interfaces/user';
 })
 export class Tab1Page {
 
-  email: String
-  user: String
-  insignias: [{
-    nombre: String,
-    descripcion: String,
-    id: Number
-  }]
-  rol: Number
-  picture: String
-  balance: Number
-  status: String
+  email: string;
+  user: User;
+  hasLoaded = false;
+
+  picture: string;
+  balance: number;
+  status: string;
 
   sliderConfig = {
     loop: false,
@@ -31,7 +27,7 @@ export class Tab1Page {
     spaceBetween: 5,
     centeredSlides: true,
     slidesPerView: 4
-  }
+  };
 
   constructor(private router: Router, private auth: AuthserviceService, private API: APIService) { }
 
@@ -40,40 +36,40 @@ export class Tab1Page {
     this.API.tieneCuenta(this.email).then((promise) => {
       promise.subscribe(
         (data: User) => {
-          this.user = data.user.username
-          this.insignias = data.user.insignias
-          this.rol = data.user.rol
+          this.user = data;
         },
         () => {
-          this.router.navigateByUrl('login')
+          this.router.navigateByUrl('login');
         }
-      )
-    })
+      );
+    });
     this.auth.getUser().then(promise => promise.subscribe(
       (data: {
-        avatarImage: String,
-        balance: Number,
-        status: String
+        avatarImage: string,
+        balance: number,
+        status: string
       }) => {
-        this.picture = this.auth.AUTH_SERVER_ADRESS + data.avatarImage
-        this.balance = data.balance
-        this.status = data.status
-      }))
+        this.picture = this.auth.AUTH_SERVER_ADRESS + data.avatarImage;
+        this.balance = data.balance;
+        this.status = data.status;
+        this.hasLoaded = true;
+      }));
   }
 
   verInsignia(ins: {
-    descripcion: String,
-    nombre: String
-  }){
-    console.log(ins)
+    descripcion: string,
+    nombre: string
+  }) {
+    console.log(ins);
   }
 
+  // tslint:disable-next-line: use-life-cycle-interface
   async ngOnInit() {
     await this.loadData();
   }
 
-  ionViewWillEnter(){
-   this.loadData()
+  ionViewWillEnter() {
+   this.loadData();
   }
 
 }

@@ -1,3 +1,4 @@
+import { Foro } from './../../interfaces/foro';
 import { APIService } from './../../api.service';
 import { AuthserviceService } from './../../authservice.service';
 import { Component, OnInit } from '@angular/core';
@@ -11,64 +12,45 @@ import { Router } from '@angular/router';
 })
 export class ListaForosPage implements OnInit {
 
-  currentUser:{
-    user:{
-      rol:Number
+  currentUser: {
+    user: {
+      rol: number
     }
-  }
+  };
 
-  foros:[{
-    title:String,
-    description:String,
-    members:[{
-      username:String,
-      picture:String
-    }],
-    preguntas:[{}],
-    created:Date,
-    admins:[String]
-  }]
-  hasLoaded=false;
+  foros: [Foro];
+  hasLoaded = false;
 
   constructor(private foroserv: ForoService, private router: Router, private auth: AuthserviceService, private API: APIService ) { }
 
-  async loadData(){
-    this.foroserv.getForos().subscribe((data:[{
-      title:String,
-      description:String,
-      members:[{
-        username:String,
-        picture:String
-      }],
-      preguntas:[{}],
-      created:Date,
-      admins:[String]}]) => {
+  async loadData() {
+    this.foroserv.getForos().subscribe((data: [Foro]) => {
       this.foros = data;
       this.auth.getEmail().then((email) => {
         if (email === null) {
-          this.router.navigateByUrl('login')
+          this.router.navigateByUrl('login');
         }
         this.API.tieneCuenta(email).then((promise) => {
-          promise.subscribe((user:{
-            user:{
-              rol:Number
+          promise.subscribe((user: {
+            user: {
+              rol: number
             }
           }) => {
-            this.currentUser = user
-            this.hasLoaded = true
-          })
-        })
+            this.currentUser = user;
+            this.hasLoaded = true;
+          });
+        });
       }, (err) => {
         this.router.navigateByUrl('login');
       }).catch((err) => {
-        this.router.navigateByUrl('login')
-      })
+        this.router.navigateByUrl('login');
+      });
     }
-    )
+    );
   }
 
   async gotoForo(title) {
-    await this.foroserv.setForoAct(title)
+    await this.foroserv.setForoAct(title);
     this.router.navigateByUrl('lista-preguntas');
   }
 
@@ -77,11 +59,11 @@ export class ListaForosPage implements OnInit {
   }
 
   createForo() {
-    this.router.navigateByUrl('crear-foro')
+    this.router.navigateByUrl('crear-foro');
   }
 
-  ionViewWillEnter(){
-   this.loadData()
+  ionViewWillEnter() {
+   this.loadData();
   }
 
 

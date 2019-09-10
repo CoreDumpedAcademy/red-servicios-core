@@ -11,10 +11,13 @@ import { Router } from '@angular/router';
 })
 export class NuevosUsuariosPage implements OnInit {
 
-  error:String = ""
-  email:String
+  error = '';
+  email: string;
 
-  constructor(private api: APIService, private router: Router, private storage: Storage,
+  constructor(
+    private api: APIService,
+    private router: Router,
+    private storage: Storage,
     private auth: AuthserviceService) { }
 
   ngOnInit() {
@@ -25,30 +28,32 @@ export class NuevosUsuariosPage implements OnInit {
     await this.api.tieneCuenta(form.value.username).then((promise) => {
       promise.subscribe(
         data => {
-          this.error = "Ya existe un usuario con ese nombre"
+          this.error = 'Ya existe un usuario con ese nombre';
         },
-        async err => {
+        async => {
+          // tslint:disable-next-line: no-shadowed-variable
           this.auth.getUser().then((promise) => promise.subscribe(
-            async (data:{avatarImage:String}) => {
-              let body = {
+            async (data: { avatarImage: string }) => {
+              const body = {
                 email: this.email,
                 username: form.value.username,
                 picture: data.avatarImage
-              }
+              };
+              // tslint:disable-next-line: no-shadowed-variable
               await this.api.registrarUsuario(body).subscribe((data) => {
               },
               (error) => {
                 this.router.navigateByUrl('');
               }
-              )
+              );
             }
-          ))
-      })
-    })
+          ));
+      });
+    });
   }
 
   goBack() {
-    this.router.navigateByUrl('login')
+    this.router.navigateByUrl('login');
   }
 
 }
