@@ -1,55 +1,45 @@
 <ion-app>
-    <ion-split-pane>
-
-        <ion-menu contentId="content">
-            
-          <ion-header id = "banner">
-            <ion-navbar>
-              <ion-title>
-              <img src="./assets/logo_cd_white.png">
-              </ion-title>
-            </ion-navbar>
-          </ion-header>
-      
-          <ion-content>
-              <ion-col>
-              <ion-avatar>
-                  <img src="./assets/profileCore.jpg">
-              </ion-avatar>
-              <div class="ion-text-center">
-                  <h3>name</h3>
-                  @Username
-                </div>
-            </ion-col>
-            <ion-list>
-              <ion-menu-toggle auto-hide="false" *ngFor="let page of pages">
-                <ion-item tappable [routerLink]="page.url" routerDirection="root" [class.active-item]="selectedPath.startsWith(page.url)">
-                    <ion-icon [name]="page.icon" slot="start" item-left></ion-icon>
-                    <ion-label>{{ page.title }}</ion-label>
-                    <ion-icon name="ios-arrow-forward"></ion-icon>
-                </ion-item>
-              </ion-menu-toggle>
-            </ion-list>
-          </ion-content>
-          <ion-footer>
-            
-              <ion-item slot= "end" tappable routerLink = "core/about" routerDirection= "root">
-                <ion-icon name = "information-circle-outline" slot="start" ></ion-icon>
-                <ion-label>About</ion-label>
-                <ion-icon name="ios-arrow-forward"></ion-icon>
-              </ion-item>
-          
-              <ion-item slot= "end" tappable routerLink = "core/login" routerDirection= "root">
-                <ion-icon name = "ios-power" slot="start" ></ion-icon>
-                <ion-label>Logout</ion-label>
-                <ion-icon name="ios-arrow-forward"></ion-icon>
-              </ion-item>
-            
-            </ion-footer>
-        </ion-menu>
-        
-      
-        <ion-router-outlet id="content" main></ion-router-outlet>
-      
-      </ion-split-pane>
+<ion-split-pane>
+  <ion-menu contentId="content">
+    <ion-header id = "banner">
+      <ion-navbar>
+        <ion-title>
+        <img src="./assets/logo_cd_white.png">
+        </ion-title>
+      </ion-navbar>
+    </ion-header>
+    <ion-content>
+        <ion-col>
+        <ion-avatar>
+            <img src="{{picture}}">
+        </ion-avatar>
+        <div class="ion-text-center">
+            <h3>@{{username}}</h3>
+          </div>
+      </ion-col>
+      <ion-list>
+        <ion-menu-toggle auto-hide="false" *ngFor="let page of pages">
+          <ion-item tappable [routerLink]="page.url" routerDirection="root" [class.active-item]="selectedPath.startsWith(page.url)">
+              <ion-icon [name]="page.icon" slot="start" item-left></ion-icon>
+              <ion-label>{{ page.title }}</ion-label>
+              <ion-icon name="ios-arrow-forward"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+      </ion-list>
+    </ion-content>
+    <ion-footer>
+      <ion-item slot= "end" tappable routerLink = "core/about" routerDirection= "root">
+        <ion-icon name = "information-circle-outline" slot="start" ></ion-icon>
+        <ion-label>About</ion-label>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-item>
+      <ion-item slot= "end" tappable routerLink = "core/login" routerDirection= "root">
+        <ion-icon name = "ios-power" slot="start" ></ion-icon>
+        <ion-label>Logout</ion-label>
+        <ion-icon name="ios-arrow-forward"></ion-icon>
+      </ion-item>
+    </ion-footer>
+  </ion-menu>
+    <ion-router-outlet id="content" main></ion-router-outlet>
+  </ion-split-pane>
 </ion-app>

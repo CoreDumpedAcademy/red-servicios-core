@@ -3,6 +3,7 @@ import { AuthserviceService } from './../authservice.service';
 import {Component} from '@angular/core';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { User } from '../interfaces/user';
 
 
 @Component({
@@ -12,17 +13,17 @@ import { Storage } from '@ionic/storage';
 })
 export class Tab1Page {
 
-  email:String
-  user:String
-  insignias:[{
-    nombre:String,
-    descripcion:String,
-    id:Number
+  email: String
+  user: String
+  insignias: [{
+    nombre: String,
+    descripcion: String,
+    id: Number
   }]
-  rol:Number
-  picture:String
-  balance:Number
-  status:String
+  rol: Number
+  picture: String
+  balance: Number
+  status: String
 
   sliderConfig = {
     loop: false,
@@ -38,23 +39,7 @@ export class Tab1Page {
     this.email = await this.auth.getEmail();
     this.API.tieneCuenta(this.email).then((promise) => {
       promise.subscribe(
-        (data:{
-          user:{
-            cuentas:{
-              telegram:String,
-              biblioteca:String,
-              slack:String
-            },
-            email:String,
-            rol:Number
-            insignias:[{
-              nombre:String,
-              descripcion:String,
-              id:Number
-            }],
-            username:String
-          }
-        }) => {
+        (data: User) => {
           this.user = data.user.username
           this.insignias = data.user.insignias
           this.rol = data.user.rol
@@ -65,20 +50,20 @@ export class Tab1Page {
       )
     })
     this.auth.getUser().then(promise => promise.subscribe(
-      (data:{
-        avatarImage:String,
-        balance:Number,
-        status:String
-      })=> {
-        this.picture = this.auth.AUTH_SERVER_ADRESS+data.avatarImage
+      (data: {
+        avatarImage: String,
+        balance: Number,
+        status: String
+      }) => {
+        this.picture = this.auth.AUTH_SERVER_ADRESS + data.avatarImage
         this.balance = data.balance
         this.status = data.status
       }))
   }
 
-  verInsignia(ins:{
-    descripcion:String,
-    nombre:String
+  verInsignia(ins: {
+    descripcion: String,
+    nombre: String
   }){
     console.log(ins)
   }

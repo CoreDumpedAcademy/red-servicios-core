@@ -8,58 +8,57 @@ import { Storage } from '@ionic/storage';
   providedIn: 'root'
 })
 export class AuthserviceService {
-  AUTH_SERVER_ADRESS: string = 'https://fridge.coredumped.es';
+  AUTH_SERVER_ADRESS = 'https://fridge.coredumped.es';
   authSubject = new BehaviorSubject(false);
 
   constructor(private http: HttpClient, private storage: Storage ) { }
 
-  async getUser(){
-    const token = await this.storage.get("TOKEN")
+  async getUser() {
+    const token = await this.storage.get('TOKEN');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/x-www-form-urlencoded',
-        'Authorization' : 'Bearer '+token
+        Authorization : 'Bearer ' + token
       })
-    }
-    return this.http.get(`${this.AUTH_SERVER_ADRESS}/user/`, httpOptions)
+    };
+    return this.http.get(`${this.AUTH_SERVER_ADRESS}/user/`, httpOptions);
   }
 
   async getEmail() {
-    let mail = this.storage.get("EMAIL")
-    return mail
+    const mail = this.storage.get('EMAIL');
+    return mail;
   }
 
-  async getToken(){
-    let token = this.storage.get("TOKEN")
-    return token
+  async getToken() {
+    const token = this.storage.get('TOKEN');
+    return token;
   }
 
-  login(user){
+  login(user) {
     return this.http.post(`${this.AUTH_SERVER_ADRESS}/login`, user).pipe(
-      tap(async (res:{
-        token: String,
-        isAdmin: Boolean
+      tap(async (res: {
+        token: string,
+        isAdmin: boolean
       }) => {
-        console.log(user.email)
-        if(res.token) {
-          await this.storage.set("TOKEN", res.token);
-          await this.storage.set("EMAIL", user.email);
+        if (res.token) {
+          await this.storage.set('TOKEN', res.token);
+          await this.storage.set('EMAIL', user.email);
           this.authSubject.next(true);
         }
       })
-    )
+    );
   }
-  async isLoggedIn(){
-    var resul:Boolean
-    await this.storage.get("EMAIL").then((data) => {
-      resul = data == null
-    })
-    return !resul
+  async isLoggedIn() {
+    let resul: boolean;
+    await this.storage.get('EMAIL').then((data) => {
+      resul = data == null;
+    });
+    return !resul;
   }
 
   // NO SÉ SI FUNCIONA
-  async logOut(){
-    await this.storage.remove("TOKEN");
-    await this.storage.remove("EMAIL");
+  async logOut() {
+    await this.storage.remove('TOKEN');
+    await this.storage.remove('EMAIL');
   }
 }

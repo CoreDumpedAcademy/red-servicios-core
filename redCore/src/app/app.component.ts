@@ -1,3 +1,6 @@
+import { User } from './interfaces/user';
+import { APIService } from './api.service';
+import { AuthserviceService } from './authservice.service';
 import {Component} from '@angular/core';
 
 import { Platform } from '@ionic/angular';
@@ -30,29 +33,45 @@ export class AppComponent {
   ];
 
   selectedPath = '';
-  picture:String
+  picture: string;
+  username: string;
 
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
-    private router: Router
+    private router: Router,
+    private service: APIService,
+    private auth: AuthserviceService,
   ) {
 
     this.initializeApp();
 
     this.router.events.subscribe((event: RouterEvent) => {
-      if(event && event.url){
+      if (event && event.url) {
         this.selectedPath = event.url;
       }
-    })
+    });
+
+    this.auth.getEmail().then((email) => {
+      this.service.tieneCuenta(email).then(promise => {
+        promise.subscribe((data: User) => {
+          console.log(data);
+          this.picture = 'http://fridge.coredumped.es' + data.user.picture;
+          this.username = data.user.username;
+        });
+      }).catch(() => {
+        this.picture = './assets/profileCore.jpg';
+        this.username = 'Usuario';
+      });
+    });
   }
 
 
-    initializeApp() {
-        this.platform.ready().then(() => {
-            this.statusBar.styleDefault();
-            this.splashScreen.hide();
-        });
-    }
+  initializeApp() {
+    this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
+      this.splashScreen.hide();
+    });
+  }
 }
