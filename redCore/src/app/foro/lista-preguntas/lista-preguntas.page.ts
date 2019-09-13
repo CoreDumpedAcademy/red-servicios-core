@@ -5,6 +5,7 @@ import { AuthserviceService } from './../../authservice.service';
 import { Component, OnInit } from '@angular/core';
 import { ForoService } from '../foro.service';
 import { Router } from '@angular/router';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lista-preguntas',
@@ -27,11 +28,25 @@ export class ListaPreguntasPage implements OnInit {
   isAMember;
   isAnAdmin;
 
+  capitalize(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
 
   async loadData() {
     this.service.getForoAct().then((foroAct: string) => {
       this.service.getForo(foroAct).subscribe((data: Foro) => {
         this.foro = data;
+        this.foro.preguntas.forEach(pregunta => {
+          moment.locale('es');
+          if (new Date().getTime() - new Date(pregunta.published).getTime() < 86400000) {
+          pregunta.published = this.capitalize(moment(pregunta.published).fromNow());
+          } else if (new Date().getTime() - new Date(pregunta.published).getTime() < 172999999) {
+            pregunta.published = 'Ayer';
+          } else if (new Date().getTime() - new Date(pregunta.published).getTime() > 172800000) {
+            pregunta.published = this.capitalize(moment(pregunta.published).format('D[/]MM[/]YY[\n]HH[:]mm'));
+          }
+        });
         this.auth.getEmail().then((email) => {
           this.API.tieneCuenta(email).then((promise) => {
             promise.subscribe((user: User) => {
@@ -55,7 +70,6 @@ export class ListaPreguntasPage implements OnInit {
   }
 
   async ngOnInit() {
-    await this.loadData();
   }
 
   subscribe() {

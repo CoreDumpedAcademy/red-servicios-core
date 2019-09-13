@@ -7,7 +7,7 @@ export interface Pregunta {
   };
   title: string;
   text: string;
-  published: Date;
+  published;
   solved: boolean;
   datewhenSolved;
   respuestas: [Respuesta];

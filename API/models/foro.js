@@ -10,14 +10,14 @@ const user = Schema({
 const respuesta = Schema({
   user,
   text: { type: String, required: true },
-  published: { type: Date, default: Date.now() },
+  published: { type: Date, default: () => new Date(Date.now()) },
 });
 
 const pregunta = Schema({
   user,
   title: String,
   text: String,
-  published: { type: Date, default: Date.now() },
+  published: { type: Date, default: () => new Date(Date.now()) },
   solved: { type: Boolean, default: false },
   respuestas: [respuesta],
   datewhenSolved: Date,
@@ -28,7 +28,7 @@ const foro = Schema({
   description: String,
   members: [String],
   preguntas: [pregunta],
-  created: { type: Date, default: Date.now() },
+  created: { type: Date, default: () => new Date(Date.now()) },
   admins: [String], // Se guardan los emails de los admins
 });
 

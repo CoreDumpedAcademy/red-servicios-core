@@ -3,6 +3,7 @@ import { ForoService } from './../foro.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Foro } from 'src/app/interfaces/foro';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lista-respuestas',
@@ -20,6 +21,10 @@ export class ListaRespuestasPage implements OnInit {
 
   }
 
+  capitalize(s: string) {
+    return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
   async loadData() {
     this.service.getForoAct().then((foro) => {
       if (foro === null) {
@@ -29,6 +34,23 @@ export class ListaRespuestasPage implements OnInit {
         this.service.getForo(foro).subscribe((data: Foro) => {
           this.title = data.title;
           this.pregunta = data.preguntas[index];
+          if (new Date().getTime() - new Date(this.pregunta.published).getTime() < 86400000) {
+            this.pregunta.published = this.capitalize(moment(this.pregunta.published).fromNow());
+            } else if (new Date().getTime() - new Date(this.pregunta.published).getTime() < 172999999) {
+              this.pregunta.published = 'Ayer';
+            } else if (new Date().getTime() - new Date(this.pregunta.published).getTime() > 172800000) {
+              this.pregunta.published = this.capitalize(moment(this.pregunta.published).format('D[/]MM[/]YY[\n]HH[:]mm'));
+            }
+          this.pregunta.respuestas.forEach(respuesta => {
+            moment.locale('es');
+            if (new Date().getTime() - new Date(respuesta.published).getTime() < 86400000) {
+              respuesta.published = this.capitalize(moment(respuesta.published).fromNow());
+            } else if (new Date().getTime() - new Date(respuesta.published).getTime() < 172999999) {
+              respuesta.published = 'Ayer';
+            } else if (new Date().getTime() - new Date(respuesta.published).getTime() > 172800000) {
+              respuesta.published = this.capitalize(moment(respuesta.published).format('D[/]MM[/]YY[\n]HH[:]mm'));
+            }
+          });
           this.hasLoaded = true;
         });
       });

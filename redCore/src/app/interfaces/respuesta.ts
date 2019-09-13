@@ -4,5 +4,5 @@ export interface Respuesta {
     picture: string
   };
   text: string;
-  published: Date;
+  published;
 }
