@@ -11,34 +11,41 @@
 
 
 <ion-content *ngIf="hasLoaded">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
   <ion-grid>
     <ion-col padding>
-      <ion-item>
-          <p style="font-size: 16px">{{foro.description}}</p>
-      </ion-item>
       <ion-button *ngIf="isAMember" expand="full" shape="round" (click)="unsubscribe()">Desuscribirse</ion-button>
-      <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button>
+      <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button><hr>
+      <blockquote text-center style="size: 72px">{{foro.description}}</blockquote>
       <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
    </ion-col>
   </ion-grid>
   <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding  (click)="goToQuestion(i)">
-    <h2 text-center>{{pregunta.title}}</h2>
-    <ion-grid>
-        <ion-item>
-          <ion-col>
+    <ion-item>
+      <ion-col>
+        <ion-avatar>
+          <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
+        </ion-avatar>
+      </ion-col>
+      <ion-col> @{{pregunta.user.username}}</ion-col>
+        <ion-col>
+          <ion-chip outline="true" *ngIf="pregunta.respuestas && pregunta.respuestas.length; else noHayRespuestas">
             <ion-avatar>
-              <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
+              <img src="http://fridge.coredumped.es/{{pregunta.respuestas[pregunta.respuestas.length - 1].user.picture}}">
             </ion-avatar>
-          </ion-col>
-          <ion-col>
-          {{pregunta.user.username}}
-          </ion-col>
-          <ion-col>
-          {{pregunta.published}}
-          </ion-col>
-        </ion-item>
-      </ion-grid>
-      <ion-card-content>{{pregunta.text}}</ion-card-content>
+            <ion-label>{{pregunta.respuestas[pregunta.respuestas.length - 1].published}}</ion-label>
+          </ion-chip>
+          <ng-template #noHayRespuestas>
+            <ion-chip outline="true" color="primary">
+              <ion-label>{{pregunta.published}}</ion-label>
+            </ion-chip>
+          </ng-template>
+        </ion-col>
+      </ion-item>
+      <h1 text-center>{{pregunta.title}}</h1>
+      <ion-card>{{pregunta.text}}</ion-card>
   </ion-card>
   <ion-fab *ngIf="isAMember" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="post()">

@@ -1,3 +1,4 @@
+import { Pregunta } from './../../interfaces/pregunta';
 import { User } from './../../interfaces/user';
 import { Foro } from 'src/app/interfaces/foro';
 import { APIService } from './../../api.service';
@@ -32,19 +33,33 @@ export class ListaPreguntasPage implements OnInit {
     return s.charAt(0).toUpperCase() + s.slice(1);
   }
 
+  async doRefresh(event) {
+    await this.loadData();
+    event.target.complete();
+  }
+
+  setFecha(pregunta) {
+    console.log(pregunta.published);
+    moment.locale('es');
+    if (new Date().getTime() - new Date(pregunta.published).getTime() < 86400000) {
+    pregunta.published = this.capitalize(moment(pregunta.published).fromNow());
+    } else if (new Date().getTime() - new Date(pregunta.published).getTime() < 172999999) {
+      pregunta.published = 'Ayer';
+    } else if (new Date().getTime() - new Date(pregunta.published).getTime() > 172800000) {
+      pregunta.published = this.capitalize(moment(pregunta.published).format('D[/]MM[/]YY[\n]HH[:]mm'));
+    }
+  }
+
 
   async loadData() {
     this.service.getForoAct().then((foroAct: string) => {
       this.service.getForo(foroAct).subscribe((data: Foro) => {
         this.foro = data;
         this.foro.preguntas.forEach(pregunta => {
-          moment.locale('es');
-          if (new Date().getTime() - new Date(pregunta.published).getTime() < 86400000) {
-          pregunta.published = this.capitalize(moment(pregunta.published).fromNow());
-          } else if (new Date().getTime() - new Date(pregunta.published).getTime() < 172999999) {
-            pregunta.published = 'Ayer';
-          } else if (new Date().getTime() - new Date(pregunta.published).getTime() > 172800000) {
-            pregunta.published = this.capitalize(moment(pregunta.published).format('D[/]MM[/]YY[\n]HH[:]mm'));
+          if (pregunta.respuestas && pregunta.respuestas.length) {
+            this.setFecha(pregunta.respuestas[pregunta.respuestas.length - 1]);
+          } else {
+            this.setFecha(pregunta);
           }
         });
         this.auth.getEmail().then((email) => {
@@ -58,7 +73,6 @@ export class ListaPreguntasPage implements OnInit {
         });
         this.hasLoaded = true;
       }, (error) => {
-        console.log(error);
         this.router.navigateByUrl('lista-foros');
       });
     });

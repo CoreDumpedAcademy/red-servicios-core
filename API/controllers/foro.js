@@ -221,6 +221,9 @@ function addAnswer(req, res) {
     if (pos > foro.preguntas.length) return res.status(400).send('No existe pregunta en esa posicion');
     if (!foro.preguntas[pos]) return res.status(404).send('No existe la pregunta');
     foro.preguntas[pos].respuestas.push(answer);
+    // UPDATE QUESTION
+    const pregunta = foro.preguntas.splice(pos, 1);
+    foro.preguntas.push(pregunta[0]);
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
       return res.status(200).send('Respuesta guardada correctamente');
