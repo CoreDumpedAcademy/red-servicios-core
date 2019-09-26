@@ -10,10 +10,13 @@ import { IonicStorageModule } from '@ionic/storage';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
+import { PopoverComponent } from './foro/popover/popover.component';
 
 @NgModule({
-    declarations: [AppComponent],
-    entryComponents: [],
+    declarations: [AppComponent, PopoverComponent],
+    entryComponents: [
+      PopoverComponent
+    ],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
     providers: [
         StatusBar,

@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 import { ForoService } from '../foro.service';
 import { Router } from '@angular/router';
 import * as moment from 'moment';
+import { PopoverController } from '@ionic/angular';
+import { PopoverComponent } from './../popover/popover.component';
 
 @Component({
   selector: 'app-lista-preguntas',
@@ -15,7 +17,11 @@ import * as moment from 'moment';
 })
 export class ListaPreguntasPage implements OnInit {
 
-  constructor(private service: ForoService, private router: Router, private auth: AuthserviceService, private API: APIService) { }
+  constructor(private popoverController: PopoverController,
+              private service: ForoService,
+              private router: Router,
+              private auth: AuthserviceService,
+              private API: APIService) { }
 
   foro: Foro;
 
@@ -39,7 +45,6 @@ export class ListaPreguntasPage implements OnInit {
   }
 
   setFecha(pregunta) {
-    console.log(pregunta.published);
     moment.locale('es');
     if (new Date().getTime() - new Date(pregunta.published).getTime() < 86400000) {
     pregunta.published = this.capitalize(moment(pregunta.published).fromNow());
@@ -76,6 +81,19 @@ export class ListaPreguntasPage implements OnInit {
         this.router.navigateByUrl('lista-foros');
       });
     });
+  }
+
+  async presentPopover(ev: any, index: number) {
+    index = Math.abs(index - (this.foro.preguntas.length - 1));
+    const popover = await this.popoverController.create({
+      component: PopoverComponent,
+      componentProps: {
+        data: this.foro.preguntas[index].respuestas[this.foro.preguntas[index].respuestas.length - 1]
+      },
+      event: ev,
+      mode: 'ios'
+    });
+    return await popover.present();
   }
 
   async goToQuestion(index: number) {

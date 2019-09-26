@@ -22,7 +22,7 @@
       <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
    </ion-col>
   </ion-grid>
-  <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding  (click)="goToQuestion(i)">
+  <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding>
     <ion-item>
       <ion-col>
         <ion-avatar>
@@ -31,7 +31,7 @@
       </ion-col>
       <ion-col> @{{pregunta.user.username}}</ion-col>
         <ion-col>
-          <ion-chip outline="true" *ngIf="pregunta.respuestas && pregunta.respuestas.length; else noHayRespuestas">
+          <ion-chip outline="true" *ngIf="pregunta.respuestas && pregunta.respuestas.length; else noHayRespuestas" (click)="presentPopover( $event, i )">
             <ion-avatar>
               <img src="http://fridge.coredumped.es/{{pregunta.respuestas[pregunta.respuestas.length - 1].user.picture}}">
             </ion-avatar>
@@ -46,6 +46,7 @@
       </ion-item>
       <h1 text-center>{{pregunta.title}}</h1>
       <ion-card>{{pregunta.text}}</ion-card>
+      <ion-button expand="block" fill="outline" (click)="goToQuestion(i)">VER HILO</ion-button>
   </ion-card>
   <ion-fab *ngIf="isAMember" vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="post()">
