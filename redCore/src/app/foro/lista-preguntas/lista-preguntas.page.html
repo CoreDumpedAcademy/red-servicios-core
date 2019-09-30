@@ -16,10 +16,8 @@
   </ion-refresher>
   <ion-grid>
     <ion-col padding>
-      <ion-button *ngIf="isAMember" expand="full" shape="round" (click)="unsubscribe()">Desuscribirse</ion-button>
-      <ion-button *ngIf="!isAMember" expand="full" shape="round" (click)="subscribe()">Suscribirse</ion-button><hr>
       <blockquote text-center style="size: 72px">{{foro.description}}</blockquote>
-      <p text-center>Usuarios en el foro: {{foro.members.length}}</p>
+      <ion-item></ion-item>
    </ion-col>
   </ion-grid>
   <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding>
@@ -38,19 +36,30 @@
             <ion-label>{{pregunta.respuestas[pregunta.respuestas.length - 1].published}}</ion-label>
           </ion-chip>
           <ng-template #noHayRespuestas>
-            <ion-chip outline="true" color="primary">
+            <ion-chip (click)="presentPopover( $event, i )" outline="true" color="primary">
               <ion-label>{{pregunta.published}}</ion-label>
             </ion-chip>
           </ng-template>
         </ion-col>
       </ion-item>
       <h1 text-center>{{pregunta.title}}</h1>
-      <ion-card>{{pregunta.text}}</ion-card>
+      <p text-center>{{pregunta.text}}</p>
       <ion-button expand="block" fill="outline" (click)="goToQuestion(i)">VER HILO</ion-button>
   </ion-card>
-  <ion-fab *ngIf="isAMember" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="post()">
-      <ion-icon name="add"></ion-icon>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button>
+      <ion-icon name="settings"></ion-icon>
     </ion-fab-button>
+    <ion-fab-list side="top">
+      <ion-fab-button *ngIf="isAMember" color="primary" (click)="post()">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="isAMember" color="danger" (click)="unsubscribe()">
+        <ion-icon name="log-out"></ion-icon>
+      </ion-fab-button>
+      <ion-fab-button *ngIf="!isAMember" (click)="subscribe()">
+        <ion-icon name="log-in"></ion-icon>
+      </ion-fab-button>
+    </ion-fab-list>
   </ion-fab>
 </ion-content>

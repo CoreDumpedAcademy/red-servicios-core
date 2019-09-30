@@ -53,9 +53,7 @@ export class PostPage implements OnInit {
       title: form.form.value.title,
       text: form.form.value.text
     };
-    this.service.sendQuestion(body, this.foro).subscribe(() => {}, (err) => {
-      console.log(err);
-    });
+    this.service.sendQuestion(body, this.foro).subscribe(() => {}, (error) => {});
     this.router.navigateByUrl('lista-preguntas');
   }
 

@@ -1,6 +1,13 @@
 <ion-grid>
-  <ion-item>
-  <p style="text-align: center">Última respuesta:</p> {{data.user.username}}
-  </ion-item>
-  <p style="text-align: center">{{data.text}}</p>
+  <div *ngIf="answer">
+    <ion-item>
+    <p style="text-align: center">Última respuesta:</p> @{{data.user.username}}
+    </ion-item>
+    <p style="text-align: center">"{{data.text}}"</p>
+  </div>
+  <div *ngIf="!answer">
+    <p style="text-align: center">Aún no hay respuestas;
+      <a>¡Se el primero en responder!</a>
+    </p>
+  </div>
 </ion-grid>

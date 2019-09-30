@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import * as moment from 'moment';
 import { PopoverController } from '@ionic/angular';
 import { PopoverComponent } from './../popover/popover.component';
+import { Respuesta } from 'src/app/interfaces/respuesta';
 
 @Component({
   selector: 'app-lista-preguntas',
@@ -61,6 +62,9 @@ export class ListaPreguntasPage implements OnInit {
       this.service.getForo(foroAct).subscribe((data: Foro) => {
         this.foro = data;
         this.foro.preguntas.forEach(pregunta => {
+          if (pregunta.text.length > 240) {
+            pregunta.text = pregunta.text.slice(0, 239) + '...';
+          }
           if (pregunta.respuestas && pregunta.respuestas.length) {
             this.setFecha(pregunta.respuestas[pregunta.respuestas.length - 1]);
           } else {
@@ -85,10 +89,16 @@ export class ListaPreguntasPage implements OnInit {
 
   async presentPopover(ev: any, index: number) {
     index = Math.abs(index - (this.foro.preguntas.length - 1));
+    let data;
+    if (this.foro.preguntas[index].respuestas.length > 0) {
+      data = this.foro.preguntas[index].respuestas[this.foro.preguntas[index].respuestas.length - 1];
+    } else {
+      data = '';
+    }
     const popover = await this.popoverController.create({
       component: PopoverComponent,
       componentProps: {
-        data: this.foro.preguntas[index].respuestas[this.foro.preguntas[index].respuestas.length - 1]
+        data
       },
       event: ev,
       mode: 'ios'
