@@ -1,3 +1,4 @@
+import { InsigniaComponent } from './tab1/insignia/insignia.component';
 import {NgModule, CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
 import {RouteReuseStrategy} from '@angular/router';
@@ -13,9 +14,10 @@ import {AppComponent} from './app.component';
 import { PopoverComponent } from './foro/popover/popover.component';
 
 @NgModule({
-    declarations: [AppComponent, PopoverComponent],
+    declarations: [AppComponent, PopoverComponent, InsigniaComponent],
     entryComponents: [
-      PopoverComponent
+      PopoverComponent,
+      InsigniaComponent
     ],
     imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, IonicStorageModule.forRoot()],
     providers: [

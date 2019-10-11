@@ -4,8 +4,10 @@ const { Schema } = mongoose;
 
 const Insignia = Schema({
   nombre: { type: String },
-  descripcion: { type: String },
   imagen: { type: String },
+  gif: { type: String },
+  descripcion: { type: String },
+  conseguida: { type: Date, default: () => new Date(Date.now()) },
 });
 
 const UserSchema = Schema({

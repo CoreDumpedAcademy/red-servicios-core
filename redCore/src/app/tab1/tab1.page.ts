@@ -1,3 +1,5 @@
+import { InsigniaComponent } from './insignia/insignia.component';
+import { PopoverController } from '@ionic/angular';
 import { APIService } from './../api.service';
 import { AuthserviceService } from './../authservice.service';
 import {Component} from '@angular/core';
@@ -16,6 +18,7 @@ export class Tab1Page {
   email: string;
   user: User;
   hasLoaded = false;
+  aux = false;
 
   picture: string;
   balance: number;
@@ -29,7 +32,10 @@ export class Tab1Page {
     slidesPerView: 4
   };
 
-  constructor(private router: Router, private auth: AuthserviceService, private API: APIService) { }
+  constructor(private router: Router,
+              private auth: AuthserviceService,
+              private API: APIService,
+              private popover: PopoverController) { }
 
   async loadData() {
     this.email = await this.auth.getEmail();
@@ -37,6 +43,9 @@ export class Tab1Page {
       promise.subscribe(
         (data: User) => {
           this.user = data;
+          if (this.aux) {
+            this.hasLoaded = true;
+          } else { this.aux = true; }
         },
         () => {
           this.router.navigateByUrl('login');
@@ -52,19 +61,31 @@ export class Tab1Page {
         this.picture = this.auth.AUTH_SERVER_ADRESS + data.avatarImage;
         this.balance = data.balance;
         this.status = data.status;
-        this.hasLoaded = true;
+        if (this.aux) {
+          this.hasLoaded = true;
+        } else { this.aux = true; }
       }));
   }
 
-  verInsignia(ins: {
+  async verInsignia(ins: {
     descripcion: string,
-    nombre: string
-  }) {
-    console.log(ins);
+    nombre: string,
+    imagen: string,
+    gif: string,
+    conseguida: Date
+  },                ev) {
+    const popover = await this.popover.create({
+      component: InsigniaComponent,
+      componentProps: {
+        data: ins
+      },
+      mode: 'ios',
+      event: ev,
+    });
+    return popover.present();
   }
 
-  // tslint:disable-next-line: use-life-cycle-interface
-  async ngOnInit() {
+  async OnInit() {
     await this.loadData();
   }
 

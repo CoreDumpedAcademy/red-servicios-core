@@ -23,7 +23,7 @@
     </ion-item><br>
       <ion-slides [options]="sliderConfig">
         <ion-slide *ngFor="let ins of this.user.user.insignias">
-            <img src="../../assets/insignias/{{ins.nombre}}.png" (click)="verInsignia(ins)">
+            <img src="../../assets/insignias/{{ins.imagen}}.png" (click)="verInsignia(ins, $event )">
         </ion-slide>
       </ion-slides>
     <ion-grid>

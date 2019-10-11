@@ -10,7 +10,9 @@ export interface User {
     insignias: [{
       nombre: string,
       descripcion: string,
-      id: number
+      imagen: string,
+      gif: string,
+      conseguida: Date,
     }],
     username: string,
     picture: string;
