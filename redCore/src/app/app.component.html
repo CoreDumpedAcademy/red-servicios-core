@@ -10,11 +10,11 @@
     </ion-header>
     <ion-content>
         <ion-col>
-        <ion-avatar>
+        <ion-avatar *ngIf="picture !== undefined" (click)="getProfile()">
             <img src="{{picture}}">
         </ion-avatar>
         <div class="ion-text-center">
-            <h3>@{{username}}</h3>
+            <h3 *ngIf="username !== undefined"> @{{username}}</h3>
           </div>
       </ion-col>
       <ion-list>
@@ -33,7 +33,7 @@
         <ion-label>About</ion-label>
         <ion-icon name="ios-arrow-forward"></ion-icon>
       </ion-item>
-      <ion-item slot= "end" tappable routerLink = "core/login" routerDirection= "root">
+      <ion-item slot= "end" tappable routerLink = "core/login" (click)="logOut()" routerDirection= "root">
         <ion-icon name = "ios-power" slot="start" ></ion-icon>
         <ion-label>Logout</ion-label>
         <ion-icon name="ios-arrow-forward"></ion-icon>

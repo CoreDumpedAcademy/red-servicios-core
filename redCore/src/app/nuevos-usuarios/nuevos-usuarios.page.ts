@@ -44,6 +44,7 @@ export class NuevosUsuariosPage implements OnInit {
               },
               (error) => {
                 this.router.navigateByUrl('');
+                setTimeout(() => window.location.reload(), 1000);
               }
               );
             }

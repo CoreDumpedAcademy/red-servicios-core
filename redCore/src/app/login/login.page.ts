@@ -25,6 +25,7 @@ export class LoginPage implements OnInit {
       this.api.checkMail(form.value.email).subscribe(
         () => {
           this.router.navigateByUrl('');
+          setTimeout(() => window.location.reload(), 1000);
         },
         () => {
           this.router.navigateByUrl('nuevos-usuarios');

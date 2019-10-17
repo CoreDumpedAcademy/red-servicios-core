@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { User } from './interfaces/user';
 import { APIService } from './api.service';
 import { AuthserviceService } from './authservice.service';
@@ -43,8 +44,8 @@ export class AppComponent {
     private router: Router,
     private service: APIService,
     private auth: AuthserviceService,
+    private storage: Storage,
   ) {
-
     this.initializeApp();
 
     this.router.events.subscribe((event: RouterEvent) => {
@@ -65,11 +66,21 @@ export class AppComponent {
     });
   }
 
+  getProfile() {
+    console.log(this.picture);
+  }
+
 
   initializeApp() {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  logOut() {
+    this.storage.clear();
+    this.router.navigateByUrl('login');
+    setTimeout(() => window.location.reload(), 1000);
   }
 }

@@ -114,18 +114,18 @@ export class ListaPreguntasPage implements OnInit {
   async ngOnInit() {
   }
 
-  subscribe() {
+  async subscribe() {
     this.service.addMember(this.currentUser.user.username, this.foro.title).subscribe(() => { },
     (error) => {
       console.log(error);
     });
-    window.location.reload();
+    await this.loadData();
   }
 
-  unsubscribe() {
+  async unsubscribe() {
     this.service.removeMember(this.currentUser.user.username, this.foro.title).subscribe(() => { },
     (error) => console.log(error));
-    window.location.reload();
+    await this.loadData();
   }
 
   ionViewWillEnter() {

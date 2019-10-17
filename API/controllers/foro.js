@@ -24,7 +24,7 @@ function addForo(req, res) {
   const foro = new Foro(req.body);
   foro.save((err) => {
     if (err) return res.status(500).send(err);
-    return res.status(200).send('Foro añadido correctamente');
+    return res.status(200).send({ message: 'Foro añadido correctamente' });
   });
 }
 
@@ -35,7 +35,7 @@ function editForo(req, res) {
     if (err) return res.status(500).send(err);
     if (!succ) return res.status(404).send('Foro no encontrado');
 
-    return res.status(200).send('Foro editado correctamente');
+    return res.status(200).send({ message: 'Foro editado correctamente' });
   });
 }
 
@@ -45,7 +45,7 @@ function deleteForo(req, res) {
     if (err) return res.status(500).send(err);
     if (!succ) return res.status(404).send('Foro no encontrado');
 
-    return res.status(200).send('Foro eliminado correctamente');
+    return res.status(200).send({ message: 'Foro eliminado correctamente' });
   });
 }
 
@@ -84,7 +84,7 @@ function addQuestion(req, res) {
     foro.preguntas.push(pregunta);
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
-      return res.status(200).send('Pregunta guardada correctamente');
+      return res.status(200).send({ message: 'Pregunta guardada correctamente' });
     });
     return 'ok';
   });
@@ -103,7 +103,7 @@ function addMember(req, res) {
     foro.members.push(member);
     Foro.update({ title }, foro, (error) => {
       if (err) return res.status(500).send(error);
-      return res.status(200).send('Miembro añadido');
+      return res.status(200).send({ message: 'Miembro añadido' });
     });
     return 'Ok';
   });
@@ -123,7 +123,7 @@ function deleteMember(req, res) {
 
     Foro.update({ title }, foro, (error) => {
       if (err) return res.status(500).send(error);
-      return res.status(200).send('Miembro eliminado');
+      return res.status(200).send({ message: 'Miembro eliminado' });
     });
     return 'Ok';
   });
@@ -144,7 +144,7 @@ function editQuestion(req, res) {
     foro.preguntas[pos] = question;
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
-      return res.status(200).send('Pregunta editada correctamente');
+      return res.status(200).send({ message: 'Pregunta editada correctamente' });
     });
     return 'OK';
   });
@@ -168,7 +168,7 @@ function solveQuestion(req, res) {
 
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
-      return res.status(200).send('Estado cambiado correctamente');
+      return res.status(200).send({ message: 'Estado cambiado correctamente' });
     });
     return 'OK';
   });
@@ -226,7 +226,7 @@ function addAnswer(req, res) {
     foro.preguntas.push(pregunta[0]);
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
-      return res.status(200).send('Respuesta guardada correctamente');
+      return res.status(200).send({ message: 'Respuesta guardada correctamente' });
     });
     return 'ok';
   });
@@ -253,7 +253,7 @@ function editAnswer(req, res) {
     foro.preguntas[pos].respuestas[ans] = answer;
     Foro.update({ title }, foro, (error) => {
       if (error) return res.status(500).send(error);
-      return res.status(200).send('Respuesta editada correctamente');
+      return res.status(200).send({ message: 'Respuesta editada correctamente' });
     });
     return 'OK';
   });
