@@ -37,7 +37,7 @@ export class NuevosUsuariosPage implements OnInit {
               const body = {
                 email: this.email,
                 username: form.value.username,
-                picture: data.avatarImage
+                picture: 'http://fridge.coredumped.es/' + data.avatarImage
               };
               // tslint:disable-next-line: no-shadowed-variable
               await this.api.registrarUsuario(body).subscribe((data) => {

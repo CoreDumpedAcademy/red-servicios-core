@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Pregunta } from './../../interfaces/pregunta';
 import { User } from './../../interfaces/user';
 import { Foro } from 'src/app/interfaces/foro';
@@ -22,7 +23,8 @@ export class ListaPreguntasPage implements OnInit {
               private service: ForoService,
               private router: Router,
               private auth: AuthserviceService,
-              private API: APIService) { }
+              private API: APIService,
+              private storage: Storage) { }
 
   foro: Foro;
 
@@ -38,6 +40,11 @@ export class ListaPreguntasPage implements OnInit {
 
   capitalize(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  goToProfile(i) {
+    this.storage.set('VISIT', this.foro.preguntas.slice().reverse()[i].user.username);
+    this.router.navigateByUrl('ver-perfil');
   }
 
   async doRefresh(event) {
@@ -73,7 +80,7 @@ export class ListaPreguntasPage implements OnInit {
         });
         this.auth.getEmail().then((email) => {
           this.API.tieneCuenta(email).then((promise) => {
-            promise.subscribe((user: User) => {
+            promise.subscribe((user: { user: User }) => {
               this.currentUser = user;
               this.isAMember = data.members.includes(this.currentUser.user.username);
               this.isAnAdmin = data.members.includes(this.currentUser.user.username);

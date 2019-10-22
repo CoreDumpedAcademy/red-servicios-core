@@ -55,8 +55,8 @@ export class AppComponent {
     });
     this.auth.getEmail().then((email) => {
       this.service.tieneCuenta(email).then(promise => {
-        promise.subscribe((data: User) => {
-          this.picture = 'http://fridge.coredumped.es' + data.user.picture;
+        promise.subscribe((data: { user: User }) => {
+          this.picture = data.user.picture;
           this.username = data.user.username;
         });
       }).catch(() => {

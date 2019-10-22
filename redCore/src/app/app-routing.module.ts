@@ -14,7 +14,8 @@ const routes: Routes = [
     {path: 'crear-foro', loadChildren: './foro/crear-foro/crear-foro.module#CrearForoPageModule'},
     {path: 'post', loadChildren: './foro/post/post.module#PostPageModule'},
     {path: 'servicios', loadChildren: './servicios/servicios.module#ServiciosPageModule'},
-    { path: 'nevera', loadChildren: './nevera/nevera.module#NeveraPageModule' }
+    { path: 'nevera', loadChildren: './nevera/nevera.module#NeveraPageModule' },  { path: 'ver-perfil', loadChildren: './tab1/ver-perfil/ver-perfil.module#VerPerfilPageModule' }
+
 ];
 
 @NgModule({

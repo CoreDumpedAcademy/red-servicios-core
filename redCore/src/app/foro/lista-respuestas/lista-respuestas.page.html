@@ -15,7 +15,7 @@
       <ion-item>
         <ion-col>
           <ion-avatar>
-            <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
+            <img (click)="goToProfile(-1)" src="{{pregunta.user.picture}}">
           </ion-avatar>
         </ion-col>
         <ion-col>
@@ -42,7 +42,7 @@
         </ion-col>
         <ion-col>
           <ion-avatar>
-            <img src="http://fridge.coredumped.es/{{respuesta.user.picture}}">
+            <img (click)="goToProfile(i)" src="{{respuesta.user.picture}}">
           </ion-avatar>
         </ion-col>
       </ion-item>

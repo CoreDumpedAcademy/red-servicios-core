@@ -16,7 +16,7 @@ import { User } from '../interfaces/user';
 export class Tab1Page {
 
   email: string;
-  user: User;
+  user: { user: User };
   hasLoaded = false;
   aux = false;
 
@@ -41,7 +41,7 @@ export class Tab1Page {
     this.email = await this.auth.getEmail();
     this.API.tieneCuenta(this.email).then((promise) => {
       promise.subscribe(
-        (data: User) => {
+        (data: { user: User }) => {
           this.user = data;
           if (this.aux) {
             this.hasLoaded = true;

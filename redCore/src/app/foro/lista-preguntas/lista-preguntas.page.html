@@ -21,14 +21,14 @@
     <ion-item>
       <ion-col>
         <ion-avatar>
-          <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
+          <img src="{{pregunta.user.picture}}" (click)="goToProfile(i)" >
         </ion-avatar>
       </ion-col>
       <ion-col> @{{pregunta.user.username}}</ion-col>
         <ion-col>
           <ion-chip outline="true" *ngIf="pregunta.respuestas && pregunta.respuestas.length; else noHayRespuestas" (click)="presentPopover( $event, i )">
             <ion-avatar>
-              <img src="http://fridge.coredumped.es/{{pregunta.respuestas[pregunta.respuestas.length - 1].user.picture}}">
+              <img src="{{pregunta.respuestas[pregunta.respuestas.length - 1].user.picture}}">
             </ion-avatar>
             <ion-label>{{pregunta.respuestas[pregunta.respuestas.length - 1].published}}</ion-label>
           </ion-chip>

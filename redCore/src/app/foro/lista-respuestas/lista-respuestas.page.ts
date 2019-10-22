@@ -1,3 +1,4 @@
+import { Storage } from '@ionic/storage';
 import { Pregunta } from './../../interfaces/pregunta';
 import { ForoService } from './../foro.service';
 import { Component, OnInit } from '@angular/core';
@@ -17,12 +18,21 @@ export class ListaRespuestasPage implements OnInit {
   pregunta: Pregunta;
   hasLoaded = false;
 
-  constructor(private service: ForoService, private router: Router) {
+  constructor(private service: ForoService, private router: Router, private storage: Storage) {
 
   }
 
   capitalize(s: string) {
     return s.charAt(0).toUpperCase() + s.slice(1);
+  }
+
+  goToProfile(i: number) {
+    if (i === -1) {
+      this.storage.set('VISIT', this.pregunta.user.username);
+    } else {
+      this.storage.set('VISIT', this.pregunta.respuestas[i].user.username);
+    }
+    this.router.navigateByUrl('ver-perfil');
   }
 
   async loadData() {
