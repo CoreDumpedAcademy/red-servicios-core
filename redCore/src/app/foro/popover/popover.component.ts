@@ -20,8 +20,8 @@ export class PopoverComponent implements OnInit {
       if (this.data.text.length > 50) {
         this.data.text = this.data.text.slice(0, 50);
         this.data.text += '...';
-        this.answer = true;
       }
+      this.answer = true;
     } else {
       this.answer = false;
     }

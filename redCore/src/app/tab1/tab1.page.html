@@ -1,35 +1,35 @@
-  <ion-header *ngIf="hasLoaded">
-    <ion-toolbar>
-      <ion-title (click)="loadData()" style="text-align: center">
-        @{{user.user.username}}
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header *ngIf="hasLoaded">
+  <ion-toolbar>
+    <ion-title (click)="loadData()" style="text-align: center">
+      @{{user.user.username}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
 
-  <ion-content *ngIf="hasLoaded">
-    <div class="banner">
-      <br><br><br>
-      <img src="{{this.picture}}">
-      <br>
-      <ion-card>
-        <ion-card-content>
-        <h2>Saldo de la nevera: {{this.balance}}€</h2>
-      </ion-card-content>
-      </ion-card>
-      <br>
-    </div>
-    <ion-item>
-      <ion-label text-center>Insignias</ion-label>
-    </ion-item><br>
-      <ion-slides [options]="sliderConfig">
-        <ion-slide *ngFor="let ins of this.user.user.insignias">
-            <img src="../../assets/insignias/{{ins.imagen}}.png" (click)="verInsignia(ins, $event )">
-        </ion-slide>
-      </ion-slides>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </ion-content>
+<ion-content *ngIf="hasLoaded">
+  <div class="banner">
+    <br><br><br>
+    <img src="{{this.picture}}">
+    <br>
+    <ion-card>
+      <ion-card-content>
+      <h2>Saldo de la nevera: {{this.balance}}€</h2>
+    </ion-card-content>
+    </ion-card>
+    <br>
+  </div>
+  <ion-item>
+    <ion-label text-center>Insignias</ion-label>
+  </ion-item><br>
+    <ion-slides [options]="sliderConfig">
+      <ion-slide *ngFor="let ins of this.user.user.insignias">
+          <img src="../../assets/insignias/{{ins.imagen}}.png" (click)="verInsignia(ins, $event )">
+      </ion-slide>
+    </ion-slides>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

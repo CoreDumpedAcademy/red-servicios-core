@@ -23,7 +23,6 @@ export class InsigniaComponent implements OnInit {
   ngOnInit() {
     this.data = this.nav.data.data;
     moment.locale('es');
-    console.log(Date.parse(this.data.conseguida));
     if ((Date.parse(this.data.conseguida) > 0)) {
       this.data.conseguida = moment(this.data.conseguida).format('D [de] MMMM [de] YYYY ');
       this.changed = true;

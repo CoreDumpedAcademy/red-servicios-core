@@ -13,13 +13,10 @@
 <ion-content *ngIf="hasLoaded">
   <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content></ion-refresher-content>
-  </ion-refresher>
-  <ion-grid>
-    <ion-col padding>
-      <blockquote text-center style="size: 72px">{{foro.description}}</blockquote>
-      <ion-item></ion-item>
-   </ion-col>
-  </ion-grid>
+  </ion-refresher><br>
+  <ion-item>
+  <blockquote text-center style="size: 72px">{{foro.description}}</blockquote>
+  </ion-item><br>
   <ion-card *ngFor="let pregunta of foro.preguntas.slice().reverse(); index as i" padding>
     <ion-item>
       <ion-col>

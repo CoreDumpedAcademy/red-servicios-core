@@ -9,13 +9,15 @@
       </ion-navbar>
     </ion-header>
     <ion-content>
-        <ion-col>
-        <ion-avatar *ngIf="picture !== undefined" (click)="getProfile()">
+      <ion-col>
+        <ion-menu-toggle *ngIf="picture !== undefined">
+          <ion-avatar (click)="getProfile()">
             <img src="{{picture}}">
-        </ion-avatar>
-        <div class="ion-text-center">
-            <h3 *ngIf="username !== undefined"> @{{username}}</h3>
+          </ion-avatar>
+          <div class="ion-text-center">
+            <h3> @{{username}}</h3>
           </div>
+        </ion-menu-toggle>
       </ion-col>
       <ion-list>
         <ion-menu-toggle auto-hide="false" *ngFor="let page of pages">
@@ -28,16 +30,21 @@
       </ion-list>
     </ion-content>
     <ion-footer>
-      <ion-item slot= "end" tappable routerLink = "core/about" routerDirection= "root">
-        <ion-icon name = "information-circle-outline" slot="start" ></ion-icon>
-        <ion-label>About</ion-label>
-        <ion-icon name="ios-arrow-forward"></ion-icon>
-      </ion-item>
-      <ion-item slot= "end" tappable routerLink = "core/login" (click)="logOut()" routerDirection= "root">
-        <ion-icon name = "ios-power" slot="start" ></ion-icon>
-        <ion-label>Logout</ion-label>
-        <ion-icon name="ios-arrow-forward"></ion-icon>
-      </ion-item>
+        <ion-item *ngIf="picture === undefined" slot= "end" tappable (click)="logIn()" routerLink="core/login" routerDirection= "root">
+          <ion-icon name = "md-log-in" slot="start" ></ion-icon>
+          <ion-label>Login</ion-label>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item slot= "end" tappable routerLink="core/about" (click)="toAbout()" routerDirection= "root">
+          <ion-icon name = "information-circle-outline" slot="start" ></ion-icon>
+          <ion-label>About</ion-label>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="picture !== undefined" slot= "end" tappable routerLink = "core/login" (click)="logOut()" routerDirection= "root">
+          <ion-icon name = "ios-power" slot="start" ></ion-icon>
+          <ion-label>Logout</ion-label>
+          <ion-icon name="ios-arrow-forward"></ion-icon>
+        </ion-item>
     </ion-footer>
   </ion-menu>
     <ion-router-outlet id="content" main></ion-router-outlet>

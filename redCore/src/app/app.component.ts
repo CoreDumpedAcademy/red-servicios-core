@@ -67,7 +67,7 @@ export class AppComponent {
   }
 
   getProfile() {
-    console.log(this.picture);
+    this.router.navigateByUrl('core/profile');
   }
 
 
@@ -76,6 +76,14 @@ export class AppComponent {
       this.statusBar.styleDefault();
       this.splashScreen.hide();
     });
+  }
+
+  toAbout() {
+    this.router.navigateByUrl('core/about');
+  }
+
+  logIn() {
+    this.router.navigateByUrl('login');
   }
 
   logOut() {
