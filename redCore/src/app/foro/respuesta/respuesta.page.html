@@ -15,7 +15,7 @@
       <ion-item>
         <ion-col>
           <ion-avatar>
-            <img src="http://fridge.coredumped.es/{{pregunta.user.picture}}">
+            <img src="{{pregunta.user.picture}}">
           </ion-avatar>
         </ion-col>
         <ion-col>
@@ -51,5 +51,9 @@
       </ion-grid>
     </form>
   </ion-card>
-    
+  <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+    <ion-fab-button (click)="goBack()">
+      <ion-icon name="arrow-back"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>

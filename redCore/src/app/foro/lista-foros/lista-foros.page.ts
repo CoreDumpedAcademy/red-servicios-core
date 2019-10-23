@@ -63,7 +63,11 @@ export class ListaForosPage implements OnInit {
   }
 
   ionViewWillEnter() {
-   this.loadData();
+    this.loadData();
+  }
+
+  goBack() {
+    this.router.navigateByUrl('');
   }
 
 

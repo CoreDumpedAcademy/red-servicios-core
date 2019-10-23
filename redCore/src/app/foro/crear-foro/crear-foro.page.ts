@@ -15,13 +15,13 @@ export class CrearForoPage implements OnInit {
 
   constructor(private API: APIService, private router: Router, private auth: AuthserviceService, private service: ForoService) { }
 
-  currentUser: User;
+  currentUser: { user: User };
   err = '';
 
   loadData() {
     this.auth.getEmail().then((email) => {
       this.API.tieneCuenta(email).then((promise) => {
-        promise.subscribe((cuenta: User) => {
+        promise.subscribe((cuenta: { user: User }) => {
           this.currentUser = cuenta;
           if (cuenta.user.rol <= 0) {
             this.router.navigateByUrl('');
@@ -46,6 +46,10 @@ export class CrearForoPage implements OnInit {
         this.router.navigateByUrl('lista-foros');
       }, 1000);
     });
+  }
+
+  goBack() {
+    this.router.navigateByUrl('lista-foros');
   }
 
 }

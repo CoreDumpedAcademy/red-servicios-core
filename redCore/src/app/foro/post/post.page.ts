@@ -57,4 +57,8 @@ export class PostPage implements OnInit {
     this.router.navigateByUrl('lista-preguntas');
   }
 
+  goBack() {
+    this.router.navigateByUrl('lista-preguntas');
+  }
+
 }

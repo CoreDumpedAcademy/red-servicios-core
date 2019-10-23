@@ -21,6 +21,8 @@ export class RespuestaPage implements OnInit {
     }
   };
 
+  cuantas: number;
+
   pregunta: Pregunta;
 
   index: number;
@@ -41,6 +43,7 @@ export class RespuestaPage implements OnInit {
             this.service.getForo(foro).subscribe((data: Foro) => {
               this.title = data.title;
               this.pregunta = data.preguntas[index];
+              this.cuantas = data.preguntas.length;
               this.index = index;
               this.hasLoaded = true;
             });
@@ -63,10 +66,16 @@ export class RespuestaPage implements OnInit {
     };
     this.service.sendAnswer(body, this.title).subscribe(() => {},
     (err) => { console.log(err); });
+    this.service.setPreguntaAct(this.cuantas - 1);
     this.router.navigateByUrl('lista-respuestas');
   }
 
   ngOnInit() {
     this.loadData();
   }
+
+  goBack() {
+    this.router.navigateByUrl('lista-respuestas');
+  }
+
 }

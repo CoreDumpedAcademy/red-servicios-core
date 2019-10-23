@@ -11,24 +11,29 @@
 
 <ion-content>
   <form #form="ngForm" (ngSubmit)="sendData(form)">
-      <ion-grid>
-        <ion-row>
+    <ion-grid>
+      <ion-row>
+        <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+          <div padding>
+            <ion-item>
+              <ion-input name="title" type="title" placeholder="Titulo" ngModel required></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-textarea rows="16" cols="20" placeholder="Texto de la pregunta" name="text" type="text" ngModel required></ion-textarea>
+            </ion-item>
+          </div>
           <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-            <div padding>
-              <ion-item>
-                <ion-input name="title" type="title" placeholder="Titulo" ngModel required></ion-input>
-              </ion-item>
-              <ion-item>
-                <ion-textarea rows="16" cols="20" placeholder="Texto de la pregunta" name="text" type="text" ngModel required></ion-textarea>
-              </ion-item>
-            </div>
-            <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
-              </ion-col>
-              <div padding>
-                <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Crear pregunta</ion-button>
-              </div>
             </ion-col>
-        </ion-row>
-      </ion-grid>
-    </form>
+            <div padding>
+              <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Crear pregunta</ion-button>
+            </div>
+          </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+    <ion-fab vertical="bottom" horizontal="start" slot="fixed">
+      <ion-fab-button (click)="goBack()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
 </ion-content>
